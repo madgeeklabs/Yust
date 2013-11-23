@@ -7,8 +7,11 @@ html {
     color: #45464a;
     font-size: 1.5em;
     text-align: center;
-    /*font-style: italic;*/
-  
+    background: url(../images/bg.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+     -moz-background-size: cover;
+       -o-background-size: cover;
+          background-size: cover;
 }
 
 body, html {
@@ -16,13 +19,7 @@ body, html {
     height: 100%;
     overflow:hidden;
 }
-body {
-    background: url(../images/bg.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-     -moz-background-size: cover;
-       -o-background-size: cover;
-          background-size: cover;
-}
+
 button {
     background: none;
     border: none;
@@ -49,6 +46,7 @@ button {
        -moz-transition: opacity 2s;
          -o-transition: opacity 2s;
             transition: opacity 2s;
+    background: white;
 }
 
 .pad {
