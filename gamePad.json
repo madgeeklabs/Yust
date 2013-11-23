@@ -1,4 +1,4 @@
-{"m": string, // "pressStart" or "press" or "pressEnd"
+{"m": string, // "press" or "pressEnd"
  "t": int // timestamp according to client
- "v": string // "up" / "down" / "left" / "right" / "upright" / "upleft" / "downright" / "downleft" 
+ "v": string // "up" / "down" / "left" / "right" / "upright" / "upleft" / "downright" / "downleft" / "1" / "2" / "3" / "4" / "5" / "6"
 }
