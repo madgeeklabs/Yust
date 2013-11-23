@@ -36,17 +36,23 @@ button {
     $MEDIA QUERIES
     =================== */
 .warning {
+    position: absolute;
+    width: 100%;
+    height: 100%;
       opacity: 1;
-      margin: auto;
-      position: absolute;
-      top: 0; left: 0; bottom: 0; right: 0;
-      height: 300px;
       z-index: 0;
     -webkit-transition: opacity 2s;
        -moz-transition: opacity 2s;
          -o-transition: opacity 2s;
             transition: opacity 2s;
     background: white;
+}
+
+.warning-container {
+    margin: auto;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      height: 300px;
 }
 
 .pad {
