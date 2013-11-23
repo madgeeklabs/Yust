@@ -43,6 +43,9 @@
 		  viewport.attr('content',
 		    'width=' + content_width + ',' +
 		    'minimum-scale=' + viewport_scale + ', maximum-scale=' + viewport_scale);
-		};
+	};
+	window.onload = function () {
+		$(window).resize(); 
+	}
 
 }());
