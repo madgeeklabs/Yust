@@ -4,6 +4,7 @@ dist
 .sass-cache
 app/bower_components
 nohup.out
-client/app/nohup.out 
-sdk/app/nohup.out 
+client/app/nohup.out
+sdk/app/nohup.out
 server/nohup.out
+.DS_Store

@@ -15,17 +15,17 @@
     <body>
         <div class="container">
             <div class="header">
-                <!-- <ul class="nav nav-pills pull-right">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul> -->
-                <h3 class="text-muted">Yust</h3>
+                <h4 class="text-muted pull-right">control any shit</h4>
+                <h2 class="text-muted">Yust</h2>
             </div>
-            <div id="qrcode"></div>
-            <br />
 
-            <canvas id="game">Loading...</canvas>
+            <article id="main">
+                <div class="qrcontainer text-center">
+                    <h3 class="text-muted">Scan this code with your cellphone</h3>
+                    <div id="qrcode" style="width:256px;"></div>
+                </div>
+                <canvas id="game">Loading...</canvas>
+            </article>
 
             <div class="footer">
                 <p>♥ from the Yust team</p>
@@ -37,7 +37,7 @@
         <script src="scripts/socket.io.min.js"></script>
 
         <script src="scripts/qrcode.min.js"></script>
-        <script src="scripts/main.js"></script>
+        <script src="scripts/gamePad.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
         <script src="scripts/pong.js"></script>
 </body>
