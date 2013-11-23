@@ -2,7 +2,7 @@
 
     var serverIP = 'http://54.247.168.152:3000';
     var   socket
-        , widget = 'mario'
+        , widget = 'control'
     ;
 
     YustSDK.init = function(){
