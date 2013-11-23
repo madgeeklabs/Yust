@@ -14,11 +14,12 @@ var yustClient = (function (options) {
 
 	function create(options) {
 		socket = io.connect(options.uri);
-		endId = options.id;
 		socket.on('connect', function(){
 	        console.log('connected!');
 	        socket.emit('joinGame', gameId);
 	    });
+
+	    endId = options.id;
 	}
 
     function getParameterByName(name) {

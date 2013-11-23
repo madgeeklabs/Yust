@@ -8,12 +8,13 @@
 	// Using jQuery for the hackathon speed needs lol
 	$(document).on('ready', function () {
 		function toggleButton(el, ev) {
+			// I put setTimeOut to chunck it all but I don't really know why... just to be sure
 			setTimeout(function () {
 				yustClient.emit(ev, el.dataset.value);
 				
 				el.classList.toggle('is-active');
 				if (el.dataset.shine) {
-					document.get(el.dataset.shine).toggleClass('is-active');
+					$(el.dataset.shine).toggleClass('is-active');
 				}
 			}, 0);
 		}
