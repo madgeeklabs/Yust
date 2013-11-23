@@ -44,6 +44,7 @@
 		viewport.attributes.content =
 		    'width=' + content_width + ',' +
 		    'minimum-scale=' + viewport_scale + ', maximum-scale=' + viewport_scale;
+		    alert(viewport.attributes.content);
 	}
 
 	window.onload = function () {
