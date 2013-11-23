@@ -5,7 +5,7 @@
 var availableSockets = {};
 
 module.exports = function (socket) {
-    console.log('socket connected');
+    //console.log('socket connected');
     
     var gameId;
 
@@ -15,14 +15,14 @@ module.exports = function (socket) {
     });
 
     socket.on('joinGame', function(data){
-        console.log('game joined');
+        //console.log('game joined');
         gameId = data.gameId;
         socket.join(gameId);
     });
  
     socket.on('control', function (data){
-        console.log('control', data);
-        socket.broadcast.to(gameId).emit('control', data);
+        //console.log('control', data);
+        socket.volatile.broadcast.to(gameId).emit('control', data);
     });
 
 };
