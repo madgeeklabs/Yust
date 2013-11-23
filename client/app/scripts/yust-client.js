@@ -16,6 +16,10 @@ var yustClient = (function (options) {
 	function create(options) {
 		socket = io.connect(options.uri);
 		endId = options.id;
+		socket.on('connect', function(){
+	        console.log('connected!');
+	        socket.emit('joinGame', gameId);
+	    });
 	}
 
     function getParameterByName(name) {
@@ -35,11 +39,6 @@ var yustClient = (function (options) {
 			}
 		};
 	}
-
-    socket.on('connect', function(){
-        console.log('connected!');
-        socket.emit('joinGame', gameId);
-    });
 
 	return {
 		create: create,
