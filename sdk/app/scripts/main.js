@@ -1,14 +1,28 @@
 (function(YustSDK, $, window, document, undefined){
 
-    var serverIP = 'http://54.247.168.152:3000';
+    var serverIP = 'http://localhost:3000';
     var   socket
         , widget = 'mario'
     ;
 
     YustSDK.init = function(){
         console.log('// Connecting...');
-        socket = window.io.connect( serverIP );
+        socket = window.io.connect( serverIP);
 
+        var gameId = Math.random();
+
+        socket.on('connect', function(){
+            console.log('conected!'); 
+            var qrcode = new QRCode("qrcode", {
+                text: "http://localhost:3000/client/app?id=" + gameId,
+                width: 128,
+                height: 128,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+            socket.emit('joinGame', {gameId:socket.id});
+        });
         // switch para cada widget ?
         socket.on( widget, function (data) {
             console.log('// Receiving data');
