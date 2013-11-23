@@ -4,14 +4,17 @@
  */
 
 var express = require('express'),
-  routes = require('./routes'),
-  api = require('./routes/api'),
   http = require('http'),
   path = require('path');
 
 var app = module.exports = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
+
+io.enable('browser client minification');  // send minified client
+io.enable('browser client etag');          // apply etag caching logic based on version number
+io.enable('browser client gzip');          // gzip the file
+//io.set('log level', 1);                    // reduce logging
 
 /**
  * Configuration
@@ -37,19 +40,9 @@ if (app.get('env') === 'production') {
 }
 
 
-/**
- * Routes
- */
 
-// serve index and view partials
-app.get('/', routes.index);
-app.get('/partials/:name', routes.partials);
-
-// JSON API
-app.get('/api/name', api.name);
 
 // redirect all others to the index (HTML5 history)
-app.get('*', routes.index);
 
 // Socket.io Communication
 io.sockets.on('connection', require('./routes/socket'));

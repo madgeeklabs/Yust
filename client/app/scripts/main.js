@@ -2,19 +2,32 @@
 	'use strict';
 
 	// Create the client and the connection
-	yustClient.create({ id: 'mario', uri: 'http://54.247.168.152:3000' });
-	// yustClient.create({ id: 'mario', uri: 'http://localhost:3000' });
+    var serverIP = 'http://54.247.168.152:3000';
+	yustClient.create({ id: 'mario', uri: serverIP });
 
 	// Using jQuery for the hackathon speed needs lol
 	$(document).on('ready', function () {
 		$('button').on('mousedown', function () {
-			yustClient.emit('pressStart', $(this).attr('data-value'));
+			var $this = $(this);
+
+			yustClient.emit('press', $this.attr('data-value'));
+			
+			$this.addClass('is-active');
+			if ($this.attr('data-shine')) {
+				$($this.attr('data-shine')).addClass('is-active');
+			}
 		});
 
 		$('button').on('mouseup', function () {
-			yustClient.emit('pressEnd', $(this).attr('data-value'));
+			var $this = $(this);
+			
+			yustClient.emit('release', $this.attr('data-value'));
+
+			$this.removeClass('is-active');
+			if ($this.attr('data-shine')) {
+				$($this.attr('data-shine')).removeClass('is-active');
+			}
 		});
-	   
 	});
 
 }());
