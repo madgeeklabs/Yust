@@ -10,18 +10,19 @@
         socket = window.io.connect( serverIP);
 
         var gameId = Math.random();
+        console.log('game id generated: ', gameId);
 
         socket.on('connect', function(){
             console.log('conected!'); 
             var qrcode = new QRCode("qrcode", {
-                text: "http://54.247.168.152:3000/client/app?id=" + gameId,
+                text: "http://54.247.168.152:3000/client/app?gameId=" + gameId,
                 width: 128,
                 height: 128,
                 colorDark : "#000000",
                 colorLight : "#ffffff",
                 correctLevel : QRCode.CorrectLevel.H
             });
-            socket.emit('joinGame', {gameId:socket.id});
+            socket.emit('createGame', {gameId:gameId});
         });
         // switch para cada widget ?
         socket.on( widget, function (data) {
@@ -33,7 +34,7 @@
 
     YustSDK.bind = function( event, timestamp, value ){
         console.log('// Binding event...');
-        var keyDirection = value == 'r' ? 39 : 37;
+        var keyDirection = value === 'r' ? 39 : 37;
         switch( event ){
             case 'press':
                 window.keysDown[keyDirection] = true;

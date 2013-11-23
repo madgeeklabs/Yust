@@ -2,7 +2,8 @@ var yustClient = (function (options) {
 	'use strict';
 
 	var socket,
-		endId;
+		endId,
+        gameId = getParameterByName('gameId');
 
 	function emit(event, value) {
 		socket.emit(endId, {
@@ -17,6 +18,13 @@ var yustClient = (function (options) {
 		endId = options.id;
 	}
 
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
 	function expose(fn) {
 		return function () {
 			if (!socket || !endId) {
@@ -27,6 +35,11 @@ var yustClient = (function (options) {
 			}
 		};
 	}
+
+    socket.on('connect', function(){
+        console.log('connected!');
+        socket.emit('joinGame', gameId);
+    });
 
 	return {
 		create: create,
