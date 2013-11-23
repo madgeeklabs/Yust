@@ -79,11 +79,11 @@
 
         <script src="/scripts/socket.io.min.js"></script>
         <script>
-          // var socket = io.connect('http://54.247.168.152:3000');
-          // socket.on('mario', function (data) {
-          //   console.log(data);
-          //   // socket.emit('my other event', { my: 'data' });
-          // });
+          var socket = io.connect('http://54.247.168.152:3000');
+          socket.on('mario', function (data) {
+            console.log(data);
+            // socket.emit('my other event', { my: 'data' });
+          });
         </script>
 
         <!-- build:js scripts/main.js -->
