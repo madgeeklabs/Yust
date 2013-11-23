@@ -2,7 +2,7 @@
 	'use strict';
 
 	// Create the client and the connection
-    var serverIP = 'http://localhost:3000';
+    var serverIP = 'http://54.247.168.152:3000';
 	yustClient.create({ id: 'mario', uri: serverIP });
 
 	// Using jQuery for the hackathon speed needs lol

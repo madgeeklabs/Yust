@@ -1,6 +1,6 @@
 (function(YustSDK, $, window, document, undefined){
 
-    var serverIP = 'http://localhost:3000';
+    var serverIP = 'http://54.247.168.152:3000';
     var   socket
         , widget = 'mario'
     ;
@@ -14,7 +14,7 @@
         socket.on('connect', function(){
             console.log('conected!'); 
             var qrcode = new QRCode("qrcode", {
-                text: "http://localhost:3000/client/app?id=" + gameId,
+                text: "http://54.247.168.152:3000/client/app?id=" + gameId,
                 width: 128,
                 height: 128,
                 colorDark : "#000000",
