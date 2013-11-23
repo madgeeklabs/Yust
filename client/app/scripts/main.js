@@ -16,11 +16,11 @@
 			}
 		}
 
-		$('button').on('touchstart', function () {
+		$('.button, .arrow').on('touchstart', function () {
 			toggleButton($(this), 'press');
 		});
 
-		$('button').on('touchend', function () {
+		$('.button, .arrow').on('touchend', function () {
 			toggleButton($(this), 'release');
 		});
 	});
