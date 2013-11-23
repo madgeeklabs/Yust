@@ -45,7 +45,8 @@ if (app.get('env') === 'production') {
 // redirect all others to the index (HTML5 history)
 
 // Socket.io Communication
-io.sockets.on('connection', require('./routes/socket'));
+io.sockets.on('connection', require('./routes/socketSdk'));
+//io.sockets.on('connection', require('./routes/socket'));
 
 /**
  * Start Server
