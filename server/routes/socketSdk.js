@@ -5,24 +5,23 @@
 var availableSockets = {};
 
 module.exports = function (socket) {
-  console.log('socket connected');
-  console.log(socket.id);
-  var gameId;
-  socket.on('createGame', function(data){
-      gameId = data.gameId;
-      socket.join(data.gameId);
-  });
+    console.log('socket connected');
+    
+    var gameId;
 
+    socket.on('createGame', function(data){
+        gameId = data.gameId;
+        socket.join(gameId);
+    });
 
-  socket.on('joinGame', function(data){
-      socket.join(data.gameId);
-  });
     socket.on('joinGame', function(data){
+        console.log('game joined');
         gameId = data.gameId;
         socket.join(gameId);
     });
  
     socket.on('control', function (data){
+        console.log('control', data);
         socket.broadcast.to(gameId).emit('control', data);
     });
 
