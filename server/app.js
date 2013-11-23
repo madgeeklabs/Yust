@@ -40,6 +40,12 @@ io.sockets.on('connection', function (socket) {
         console.log('game joined', data);
         gameId = data;
         socket.join(gameId);
+        socket.volatile.broadcast.to(gameId).emit('clientPaired', {success:true});
+    });
+
+    socket.on('disconnect', function(){
+    
+        socket.volatile.broadcast.to(gameId).emit('clientUnpaired', {success:true});
     });
  
     socket.on('control', function (data){
