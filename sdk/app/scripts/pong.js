@@ -2,19 +2,19 @@ var animate = window.requestAnimationFrame || window.webkitRequestAnimationFrame
         window.setTimeout(callback, 1000 / 60)
     };
 var canvas = document.getElementById("game");
-var width = 400;
-var height = 600;
+var width = 700;
+var height = 400;
 canvas.width = width;
 canvas.height = height;
 var context = canvas.getContext('2d');
 var player = new Player();
 var computer = new Computer();
-var ball = new Ball(200, 300);
+var ball = new Ball(350, 200);
 
 var keysDown = {};
 
 var render = function () {
-    context.fillStyle = "#FF00FF";
+    context.fillStyle = "#000000";
     context.fillRect(0, 0, width, height);
     player.render();
     computer.render();
@@ -43,7 +43,7 @@ function Paddle(x, y, width, height) {
 }
 
 Paddle.prototype.render = function () {
-    context.fillStyle = "#0000FF";
+    context.fillStyle = "#FFFFFF";
     context.fillRect(this.x, this.y, this.width, this.height);
 };
 
@@ -55,14 +55,14 @@ Paddle.prototype.move = function (x, y) {
     if (this.x < 0) {
         this.x = 0;
         this.x_speed = 0;
-    } else if (this.x + this.width > 400) {
-        this.x = 400 - this.width;
+    } else if (this.x + this.width > 700) {
+        this.x = 700 - this.width;
         this.x_speed = 0;
     }
 };
 
 function Computer() {
-    this.paddle = new Paddle(175, 10, 50, 10);
+    this.paddle = new Paddle(325, 10, 50, 10);
 }
 
 Computer.prototype.render = function () {
@@ -80,13 +80,13 @@ Computer.prototype.update = function (ball) {
     this.paddle.move(diff, 0);
     if (this.paddle.x < 0) {
         this.paddle.x = 0;
-    } else if (this.paddle.x + this.paddle.width > 400) {
-        this.paddle.x = 400 - this.paddle.width;
+    } else if (this.paddle.x + this.paddle.width > 700) {
+        this.paddle.x = 700 - this.paddle.width;
     }
 };
 
 function Player() {
-    this.paddle = new Paddle(175, 580, 50, 10);
+    this.paddle = new Paddle(325, 380, 50, 10);
 }
 
 Player.prototype.render = function () {
@@ -116,7 +116,7 @@ function Ball(x, y) {
 Ball.prototype.render = function () {
     context.beginPath();
     context.arc(this.x, this.y, 5, 2 * Math.PI, false);
-    context.fillStyle = "#000000";
+    context.fillStyle = "#FFFFFF";
     context.fill();
 };
 
@@ -131,19 +131,19 @@ Ball.prototype.update = function (paddle1, paddle2) {
     if (this.x - 5 < 0) {
         this.x = 5;
         this.x_speed = -this.x_speed;
-    } else if (this.x + 5 > 400) {
-        this.x = 395;
+    } else if (this.x + 5 > 700) {
+        this.x = 695;
         this.x_speed = -this.x_speed;
     }
 
-    if (this.y < 0 || this.y > 600) {
+    if (this.y < 0 || this.y > 400) {
         this.x_speed = 0;
         this.y_speed = 3;
-        this.x = 200;
-        this.y = 300;
+        this.x = 350;
+        this.y = 200;
     }
 
-    if (top_y > 300) {
+    if (top_y > 200) {
         if (top_y < (paddle1.y + paddle1.height) && bottom_y > paddle1.y && top_x < (paddle1.x + paddle1.width) && bottom_x > paddle1.x) {
             this.y_speed = -3;
             this.x_speed += (paddle1.x_speed / 2);

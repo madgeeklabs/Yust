@@ -19,7 +19,15 @@
 
     YustSDK.bind = function( event, timestamp, value ){
         console.log('// Binding event...');
-
+        var keyDirection = value == 'r' ? 39 : 37;
+        switch( event ){
+            case 'press':
+                window.keysDown[keyDirection] = true;
+                break;
+            case 'release':
+                delete window.keysDown[keyDirection];
+                break;
+        }
     }
 
     return YustSDK;
