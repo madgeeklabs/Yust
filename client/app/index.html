@@ -15,18 +15,27 @@
         <!-- endbuild -->
     </head>
     <body>
-        <!--[if lt IE 10]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
 
         <div class="pad">
-            <button data-value="1">1</button>
-            <button data-value="2">2</button>
-            <button data-value="3">3</button>
-            <button data-value="4">4</button>
+            <div class="buttons">
+                <button class="button button-y" data-value="y"></button>
+                <button class="button button-x" data-value="x"></button>
+                <button class="button button-b" data-value="b"></button>
+                <button class="button button-a" data-value="a"></button>
+            </div>
+
+            <div class="arrows">
+                <!-- It's cool enough for the hackathon... -->
+                <button class="arrow arrow-up" data-value="u"></button>
+                <button class="arrow arrow-down" data-value="d"></button>
+                <button class="arrow arrow-left" data-value="l"></button>
+                <button class="arrow arrow-right" data-value="r"></button>
+                <button class="arrow-d arrow-left-up" data-value="lu" data-shine=".arrow-up,.arrow-left"></button>
+                <button class="arrow-d arrow-left-down" data-value="lb" data-shine=".arrow-left,.arrow-down"></button>
+                <button class="arrow-d arrow-right-up" data-value="ru" data-shine=".arrow-up,.arrow-right"></button>
+                <button class="arrow-d arrow-right-down" data-value="rb" data-shine=".arrow-right,.arrow-down"></button>
+            </div>
         </div>
-
-
 
         <div class="warning">
             Put your device in landscape mode to play.
