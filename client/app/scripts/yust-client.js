@@ -5,7 +5,6 @@ var yustClient = (function (options) {
 		endId;
 
 	function emit(event, value) {
-		console.log(event, value, endId, socket);
 		socket.emit(endId, {
 			'm': event,
 			't': new Date().getTime(),
