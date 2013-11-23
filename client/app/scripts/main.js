@@ -7,26 +7,21 @@
 
 	// Using jQuery for the hackathon speed needs lol
 	$(document).on('ready', function () {
-		$('button').on('mousedown', function () {
-			var $this = $(this);
-
-			yustClient.emit('press', $this.attr('data-value'));
+		function toggleButton(el, ev) {
+			yustClient.emit(ev, el.attr('data-value'));
 			
-			$this.addClass('is-active');
-			if ($this.attr('data-shine')) {
-				$($this.attr('data-shine')).addClass('is-active');
+			el.toggleClass('is-active');
+			if (el.attr('data-shine')) {
+				$(el.attr('data-shine')).toggleClass('is-active');
 			}
+		}
+
+		$('.button, .arrow').on('touchstart', function () {
+			toggleButton($(this), 'press');
 		});
 
-		$('button').on('mouseup', function () {
-			var $this = $(this);
-			
-			yustClient.emit('release', $this.attr('data-value'));
-
-			$this.removeClass('is-active');
-			if ($this.attr('data-shine')) {
-				$($this.attr('data-shine')).removeClass('is-active');
-			}
+		$('.button, .arrow').on('touchend', function () {
+			toggleButton($(this), 'release');
 		});
 	});
 
