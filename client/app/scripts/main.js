@@ -8,15 +8,12 @@
 	// Using jQuery for the hackathon speed needs lol
 	$(document).on('ready', function () {
 		function toggleButton(el, ev) {
-			// I put setTimeOut to chunck it all but I don't really know why... just to be sure
-			setTimeout(function () {
-				yustClient.emit(ev, el.dataset.value);
-				
-				el.classList.toggle('is-active');
-				if (el.dataset.shine) {
-					$(el.dataset.shine).toggleClass('is-active');
-				}
-			}, 0);
+			yustClient.emit(ev, el.dataset.value);
+			
+			el.classList.toggle('is-active');
+			if (el.dataset.shine) {
+				$(el.dataset.shine).toggleClass('is-active');
+			}
 		}
 
 		$('.button, .arrow, .arrow-d').on('touchstart', function () {
