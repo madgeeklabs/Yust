@@ -18,7 +18,7 @@
                 text: "http://54.247.168.152/client/app?gameId=" + gameId,
                 width: 256,
                 height: 256,
-                colorDark : "#000000",
+                colorDark : "#aa0000",
                 colorLight : "#ffffff",
                 correctLevel : QRCode.CorrectLevel.H
             });
