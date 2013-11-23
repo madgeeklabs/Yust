@@ -8,7 +8,9 @@
 	// Using jQuery for speed purposes in the hackaton lol
 	$(document).on('ready', function () {
 		function toggleButton(el, ev) {
-			yustClient.emit(ev, el.dataset.value);
+			setTimeout(function () {
+				yustClient.emit(ev, el.dataset.value);
+			}, 0);
 			
 			el.classList.toggle('is-active');
 		}
