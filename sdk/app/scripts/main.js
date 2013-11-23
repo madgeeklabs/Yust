@@ -1,7 +1,7 @@
 (function(YustSDK, $, window, document, undefined){
 
-    var   serverIP = 'http://54.247.168.152:3000'
-        , socket
+    var serverIP = 'http://54.247.168.152:3000';
+    var socket;
 
     YustSDK.init = function(){
         console.log('// Connecting...');
