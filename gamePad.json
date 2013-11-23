@@ -1,4 +1,75 @@
-{"m": string, // "press" or "pressEnd"
- "t": int // timestamp according to client
- "v": string // "up" / "down" / "left" / "right" / "upright" / "upleft" / "downright" / "downleft" / "1" / "2" / "3" / "4" / "5" / "6"
+{
+    "m": string, // "press" or "pressEnd"
+    "t": int // timestamp according to client
+    "v": string // "up" / "down" / "left" / "right" / "upright" / "upleft" / "downright" / "downleft" / "1" / "2" / "3" / "4" / "5" / "6"
 }
+
+/*
+// Gamepad
+// Button A is pressed
+{
+  "w": "gamepad",
+  "e": "press",
+  "c": "ba",
+  "v": "a"
+}
+// Button B is released
+{
+  "w": "gamepad",
+  "e": "release",
+  "c": "bb",
+  "v": "b"
+}
+// Joystick moved to the left
+{
+  "w": "gamepad",
+  "c": "jl",
+  "e": "press",
+  "v": "180"
+}
+// Joystick is released
+{
+  "w": "gamepad",
+  "c": "jl",
+  "e": "release",
+  "v": "-1"
+}
+
+// Drawpad
+// User starts touching the screen
+{
+  "w": "drawpad",
+  "c": "touch",
+  "e": "touchBegin",
+  "v": {
+    "x": 0.1,
+    "y": 0.2
+  }
+}
+// User keeps touching and moving
+{
+  "w": "drawpad",
+  "c": "touch",
+  "e": "touchMove",
+  "v": {
+    "x": 0.2,
+    "y": 0.3
+  }
+}
+// The user lifts his finger
+{
+  "w": "drawpad",
+  "c": "touch",
+  "e": "touchEnd",
+  "v": {
+    "x": 0.3,
+    "y": 0.4
+  }
+}
+// The user presses the clean Button
+{
+  "w": "drawpad",
+  "c": "clean",
+  "e": "press"
+}
+*/
