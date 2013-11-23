@@ -1,0 +1,16 @@
+/* Force landscape */
+.warning { display: none; }
+@media only screen and (orientation:portrait){
+    .pad { display:none; }
+    .warning { display:block; }
+}
+@media only screen and (orientation:landscape){
+    .warning { display:none; }
+}
+
+/* Basic pad */
+.pad {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
