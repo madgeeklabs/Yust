@@ -23,33 +23,26 @@
 	});
 
 	// Setting the viewport to see it in every device
-	var viewport = document.querySelector('meta[name=viewport]');
-
-	function resize() {
+	var viewport = $('meta[name=viewport]');
+	window.onresize = function () {
 		var content_width, screen_dimension;
 
-		if (window.orientation == 0 || window.orientation == 180) {
+		  if (window.orientation == 0 || window.orientation == 180) {
 		    // portrait
 		    content_width = 630;
 		    screen_dimension = screen.width * 0.98; // fudge factor was necessary in my case
-		} else if (window.orientation == 90 || window.orientation == -90) {
+		  } else if (window.orientation == 90 || window.orientation == -90) {
 		    // landscape
 		    content_width = 950;
 		    screen_dimension = screen.height;
-		}
+		  }
 
-		var viewport_scale = screen_dimension / content_width;
+		  var viewport_scale = screen_dimension / content_width;
 
 		  // resize viewport
-		viewport.attributes.content =
+		  viewport.attr('content',
 		    'width=' + content_width + ',' +
-		    'minimum-scale=' + viewport_scale + ', maximum-scale=' + viewport_scale;
-		    alert(viewport.attributes.content);
-	}
-
-	window.onload = function () {
-		window.onresize = resize;
-		resize();
-	};
+		    'minimum-scale=' + viewport_scale + ', maximum-scale=' + viewport_scale);
+		};
 
 }());
