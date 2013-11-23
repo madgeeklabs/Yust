@@ -8,7 +8,6 @@ var yustClient = (function (options) {
 	function emit(event, value) {
 		socket.emit(endId, {
 			'm': event,
-			't': new Date().getTime(),
 			'v': value
 		});
 	}

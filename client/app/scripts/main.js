@@ -8,20 +8,22 @@
 	// Using jQuery for the hackathon speed needs lol
 	$(document).on('ready', function () {
 		function toggleButton(el, ev) {
-			yustClient.emit(ev, el.attr('data-value'));
-			
-			el.toggleClass('is-active');
-			if (el.attr('data-shine')) {
-				$(el.attr('data-shine')).toggleClass('is-active');
-			}
+			setTimeout(function () {
+				yustClient.emit(ev, el.dataset.value);
+				
+				el.classList.toggle('is-active');
+				if (el.dataset.shine) {
+					document.get(el.dataset.shine).toggleClass('is-active');
+				}
+			}, 0);
 		}
 
 		$('.button, .arrow, .arrow-d').on('touchstart', function () {
-			toggleButton($(this), 'press');
+				toggleButton(this, 'press');
 		});
 
 		$('.button, .arrow, .arrow-d').on('touchend', function () {
-			toggleButton($(this), 'release');
+			toggleButton(this, 'release');
 		});
 
 		$(window).trigger('resize');
