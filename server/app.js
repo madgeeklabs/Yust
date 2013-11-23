@@ -21,23 +21,6 @@ io.enable('browser client gzip');          // gzip the file
 
 // all environments
 app.set('port', process.env.PORT || 3000);
-app.use(express.logger('dev'));
-app.use(express.bodyParser());
-app.use(express.methodOverride());
-app.use(app.router);
-
-// development only
-if (app.get('env') === 'development') {
-  app.use(express.errorHandler());
-}
-
-// production only
-if (app.get('env') === 'production') {
-  // TODO
-   a = 1;
-}
-
-
 
 // redirect all others to the index (HTML5 history)
 
@@ -57,13 +40,19 @@ io.sockets.on('connection', function (socket) {
         console.log('game joined', data);
         gameId = data;
         socket.join(gameId);
+        socket.volatile.broadcast.to(gameId).emit('clientPaired', {success:true});
+    });
+
+    socket.on('disconnect', function(){
+    
+        socket.volatile.broadcast.to(gameId).emit('clientUnpaired', {success:true});
     });
  
     socket.on('control', function (data){
         console.log('control', data);
         console.log('sending mesage to gameId:', gameId);
-        io.sockets.in(gameId).emit('control', data);
-        //socket.volatile.broadcast.to(gameId).emit('control', data);
+        //io.sockets.in(gameId).emit('control', data);
+        socket.volatile.broadcast.to(gameId).emit('control', data);
     });
 
 });
