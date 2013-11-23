@@ -1,6 +1,5 @@
 node_modules
-public
+dist
 .tmp
 .sass-cache
 app/bower_components
-heroku
