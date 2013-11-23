@@ -19,6 +19,9 @@ var yustClient = (function (options) {
             console.log('joiingin game: ', gameId);
 	        socket.emit('joinGame', gameId);
 	    });
+	    socket.on('clientUnpaired', function(){
+	        console.log('disconnected!');
+	    });
 
 	    endId = options.id;
 	}

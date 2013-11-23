@@ -2,6 +2,11 @@
 /*  =================== 
     $BASE
     =================== */
+* {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none; /* Disable selection/copy in UIWebView */
+}
+
 html {
     font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
     color: #45464a;
