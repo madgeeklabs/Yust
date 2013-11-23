@@ -15,7 +15,7 @@
         socket.on('connect', function(){
             console.log('conected!'); 
             var qrcode = new QRCode("qrcode", {
-                text: "http://54.247.168.152:3000/client/app?gameId=" + gameId,
+                text: "http://54.247.168.152/client/app?gameId=" + gameId,
                 width: 256,
                 height: 256,
                 colorDark : "#000000",
