@@ -38,7 +38,11 @@ if (app.get('env') === 'production') {
 }
 
 
-var socketFunction = function (socket) {
+
+// redirect all others to the index (HTML5 history)
+
+// Socket.io Communication
+io.sockets.on('connection', function (socket) {
     //console.log('socket connected');
     
     var gameId;
@@ -51,7 +55,7 @@ var socketFunction = function (socket) {
 
     socket.on('joinGame', function(data){
         console.log('game joined', data);
-        gameId = data.gameId;
+        gameId = data;
         socket.join(gameId);
     });
  
@@ -62,12 +66,7 @@ var socketFunction = function (socket) {
         //socket.volatile.broadcast.to(gameId).emit('control', data);
     });
 
-};
-
-// redirect all others to the index (HTML5 history)
-
-// Socket.io Communication
-io.sockets.on('connection', socketFunction);
+});
 //io.sockets.on('connection', require('./routes/socket'));
 
 /**
