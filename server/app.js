@@ -38,12 +38,36 @@ if (app.get('env') === 'production') {
 }
 
 
+var socketFunction = function (socket) {
+    //console.log('socket connected');
+    
+    var gameId;
 
+    socket.on('createGame', function(data){
+        console.log('createGame', data);
+        gameId = data.gameId;
+        socket.join(gameId);
+    });
+
+    socket.on('joinGame', function(data){
+        console.log('game joined', data);
+        gameId = data.gameId;
+        socket.join(gameId);
+    });
+ 
+    socket.on('control', function (data){
+        console.log('control', data);
+        console.log('sending mesage to gameId:', gameId);
+        io.sockets.in(gameId).emit('control', data);
+        //socket.volatile.broadcast.to(gameId).emit('control', data);
+    });
+
+};
 
 // redirect all others to the index (HTML5 history)
 
 // Socket.io Communication
-io.sockets.on('connection', require('./routes/socketSdk'));
+io.sockets.on('connection', socketFunction);
 //io.sockets.on('connection', require('./routes/socket'));
 
 /**
