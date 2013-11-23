@@ -124,7 +124,7 @@ button {
     .arrow-up, 
     .arrow-down {
         width: 159px;
-        height: 59px;
+        height: 150px;
         background-position: -93px 0;
         top: 0;
         left: 50%;
@@ -141,19 +141,19 @@ button {
     .arrow-left, 
     .arrow-right {
         height: 159px;
-        width: 59px;
+        width: 150px;
         background-position: 0 50%;
         left: 0;
         top: 50%;
         margin-top: -80px;
     }
     .arrow-right { 
-        background-position: -287px 50%; 
+        background-position: -197px 50%; 
         right: 0;
         left: auto;
     }
     .arrow-left.is-active { background-position: -346px 50%; }
-    .arrow-right.is-active { background-position: -633px 50%; }
+    .arrow-right.is-active { background-position: -543px 50%; }
 
 .arrow-d {
     background: url('../images/arrows-diagonal.png') no-repeat;
