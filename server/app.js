@@ -4,8 +4,7 @@
  */
 
 var express = require('express'),
-  http = require('http'),
-  path = require('path');
+  http = require('http');
 
 var app = module.exports = express();
 var server = require('http').createServer(app);
@@ -14,7 +13,7 @@ var io = require('socket.io').listen(server);
 io.enable('browser client minification');  // send minified client
 io.enable('browser client etag');          // apply etag caching logic based on version number
 io.enable('browser client gzip');          // gzip the file
-io.set('log level', 0);                    // reduce logging
+//io.set('log level', 0);                    // reduce logging
 
 /**
  * Configuration
@@ -25,7 +24,6 @@ app.set('port', process.env.PORT || 3000);
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
 
 // development only

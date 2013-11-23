@@ -16,6 +16,7 @@ var yustClient = (function (options) {
 		socket = io.connect(options.uri);
 		socket.on('connect', function(){
 	        console.log('connected!');
+            console.log('joiingin game: ', gameId);
 	        socket.emit('joinGame', gameId);
 	    });
 
