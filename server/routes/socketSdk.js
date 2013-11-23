@@ -23,7 +23,9 @@ module.exports = function (socket) {
  
     socket.on('control', function (data){
         console.log('control', data);
-        socket.volatile.broadcast.to(gameId).emit('control', data);
+        console.log('sending mesage to gameId:', gameId);
+        io.sockets.in(gameId).emit('control', data);
+        //socket.volatile.broadcast.to(gameId).emit('control', data);
     });
 
 };

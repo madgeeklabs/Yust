@@ -9,7 +9,17 @@
         console.log('// Connecting...');
         socket = window.io.connect( serverIP);
 
-        var gameId = Math.random();
+        function makeid(){
+            var text = "";
+            var i;
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+            for( i=0; i < 5; i++ ){
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+            return text;
+        }
+        gameId = makeid();
         console.log('game id generated: ', gameId);
 
         socket.on('connect', function(){
