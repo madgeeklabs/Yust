@@ -78,6 +78,16 @@ button {
     opacity: 0;
 }
 
+@media only screen and (orientation:portrait) {
+  .pad {
+    display: none;
+  }
+
+  .warning {
+    opacity: 1;
+  }
+}
+
 
 
 /*  =================== 

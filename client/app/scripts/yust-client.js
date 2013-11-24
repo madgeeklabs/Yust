@@ -23,7 +23,6 @@ var yustClient = (function (options) {
 
 	    socket.on('clientPaired', function (data) {
 	    	if (data.success) {
-	    		// TODO: show pad
 	    		$('.pad').removeClass('is-hidden');
 	    		$('.warning').addClass('is-hidden');
 	    	} else {
