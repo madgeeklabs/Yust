@@ -6,7 +6,7 @@ var context = theCanvas.getContext('2d');
 // context.strokeStyle = '#000000';
 // context.strokeRect(0, 0, theCanvas.width, theCanvas.height);
 
-var canvas = YustSdk.createApp('trackPad', 'drawpad', ['#FF0000', '#00FF00', '#0000FF', '#0FF000', '#000FF0', '#F0F000', '#F00F00', '#F000F0', '#F0000F']);
+var canvas = YustSdk.createApp('trackPad', 'drawpad', ['#F7941E', '#FF0000', '#FFF200', '#00A651', '#1C75BC', '#92278F', '#000000', '#FF5CA6', '#69EAF4']);
 canvas
 .on('trackPad', function( response ){
     context.fillStyle = response.p;
