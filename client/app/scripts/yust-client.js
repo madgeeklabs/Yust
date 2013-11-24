@@ -25,7 +25,7 @@ var yustClient = (function (options) {
 	    	if (data.type === 'trackPad') {
 	    		var objToShow = $('.draw');
 	    	} else {
-	    		var objToShow = $('.pad')
+	    		var objToShow = $('.pad');
 	    	}
 
 	    	if (data.success) {
