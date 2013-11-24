@@ -36,7 +36,6 @@ var YustSDK = {};
         socket.on('clientPaired', function (data) {
             console.log('clientPaired', data);
             windowSize = exec('./MouseTools -location', puts);
-            console.log('windowSize:', windowSize, ' /windowSize');
         });
 
         socket.on('clientUnpaired', function (data) {
@@ -67,8 +66,6 @@ var YustSDK = {};
             res.end('"/></body></html>');
         }).listen(3333);
         console.log('Listening in http://localhost:3333, go here and scan the qr code with your mobile!');
-
-        // exec("./MouseTools -x 300 -y 300", puts);
     };
 
    
