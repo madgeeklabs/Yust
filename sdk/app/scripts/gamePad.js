@@ -101,10 +101,8 @@ var gamepad = $Yust.createApp('gamepad');
         });
 
         socket.on('clientPaired', function( response ){
-            if( response.success === true ){
-                console.log(response.playerName);
-                $('.qrcontainer').hide();
-            }
+            console.log(response.playerName);
+            $('.qrcontainer').hide();
         });
 
         socket.on('clientUnpaired', function( response ){
@@ -120,15 +118,17 @@ var gamepad = $Yust.createApp('gamepad');
 
     YustGamePad.bind = function( event, timestamp, value, name ){
         var keyDirection = value === 'r' ? 39 : 37;
-        switch( event ){
-            case 'press':
-                console.log( 'The user: ' + name);
-                window.keysDown[keyDirection] = true;
-                break;
-            case 'release':
-                console.log( 'The user: ' + name);
-                delete window.keysDown[keyDirection];
-                break;
+        if( name == 'Human' )
+            switch( event ){
+                case 'press':
+                    console.log( 'The user: ' + name + ' pressed something');
+                    window.keysDown[keyDirection] = true;
+                    break;
+                case 'release':
+                    console.log( 'The user: ' + name + ' released something');
+                    delete window.keysDown[keyDirection];
+                    break;
+            }
         }
     }
 
