@@ -42,8 +42,7 @@ var YustSDK = {};
 
         // switch para cada widget ?
         socket.on( 'trackPad', function (data) {
-            var order = "./MouseTools -x "+ x +" -y "+ y;
-            mouseMoveTo(data.v.x, data.v.y);
+            var order = "./MouseTools -x "+ data.v.x +" -y "+ data.v.y;
 
             switch (data.m) {
                 case 'mouseUp':
