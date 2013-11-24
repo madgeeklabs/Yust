@@ -5,7 +5,7 @@
     var serverIP = 'http://54.247.168.152:3000',
     	states = {};
 
-	yustClient.create({ id: 'control', uri: serverIP });
+	yustClient.create({ uri: serverIP });
 
 	// Using jQuery for speed purposes in the hackaton lol
 	$(document).on('ready', function () {
@@ -17,14 +17,14 @@
 			}
 			
 			setTimeout(function () {
-				yustClient.emit(ev, el.dataset.value);
+				yustClient.emit('control', ev, el.dataset.value);
 			}, 0);
 			
 			el.classList.toggle('is-active');
 		}
 
 		function emitMousePosition(x, y) {
-			yustClient.emit('trackPad', {'x':x, 'y': y});
+			yustClient.emit('trackPad', 'moveTo',{'x': x, 'y': y});
 		}
 
 		$('.button, .arrow, .arrow-d').on('touchstart', function () {

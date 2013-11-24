@@ -2,11 +2,10 @@ var yustClient = (function (options) {
 	'use strict';
 
 	var socket,
-		endId,
         gameId = getParameterByName('gameId');
 
-	function emit(event, value) {
-		socket.emit(endId, {
+	function emit(type, event, value) {
+		socket.emit(type, {
 			'm': event,
 			'v': value
 		});
@@ -44,8 +43,6 @@ var yustClient = (function (options) {
 	    socket.on('clientUnpaired', function(){
 	        console.log('disconnected!');
 	    });
-
-	    endId = options.id;
 	}
 
     function getParameterByName(name) {
@@ -57,7 +54,7 @@ var yustClient = (function (options) {
 
 	function expose(fn) {
 		return function () {
-			if (!socket || !endId) {
+			if (!socket) {
 				throw 'Error: yustClient not initialized!';
 			} else {
 				fn.apply(this, arguments);
