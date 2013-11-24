@@ -24,8 +24,10 @@
 		}
 
 		function emitMousePosition(x, y) {
-			yustClient.emit('trackPad', 'moveTo',{'x': x, 'y': y});
+			yustClient.emit('trackPad', 'mousMoveTo',{'x': x, 'y': y});
 		}
+
+		function emit
 
 		$('.button, .arrow, .arrow-d').on('touchstart', function () {
 				toggleButton(this, 'press');
@@ -36,12 +38,16 @@
 		});
 
 		document.getElementById('draw').addEventListener('touchstart', function(e) {
-	        emitMousePosition(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
+			yustClient.emit('trackPad', 'mouseDown', { 'x': e.changedTouches[0].pageX, 'y': e.changedTouches[0].pageY });
+	    }, false);
+
+	    document.getElementById('draw').addEventListener('touchend', function(e) {
+			yustClient.emit('trackPad', 'mouseUp', { 'x': e.changedTouches[0].pageX, 'y': e.changedTouches[0].pageY });
 	    }, false);
 
 	    document.getElementById('draw').addEventListener('touchmove', function(e) {
 	        e.preventDefault();
-	        emitMousePosition(e.targetTouches[0].pageX, e.targetTouches[0].pageY);
+			yustClient.emit('trackPad', 'mouseMoveTo', { 'x': e.changedTouches[0].pageX, 'y': e.changedTouches[0].pageY })
 	    }, false);
 	});
 

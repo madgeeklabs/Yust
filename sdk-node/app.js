@@ -42,7 +42,13 @@ var YustSDK = {};
 
         // switch para cada widget ?
         socket.on( 'trackPad', function (data) {
-            console.log('data');
+            console.log('trackPad', data);
+            // YustSDK.bind( data.m, data.t, data.v );
+        });
+
+        // switch para cada widget ?
+        socket.on( 'mouseDown', function (data) {
+            console.log('mouseDown', data);
             // YustSDK.bind( data.m, data.t, data.v );
         });
 
