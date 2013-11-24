@@ -44,7 +44,8 @@ io.sockets.on('connection', function (socket) {
     });
 
     var assingSlot = function(socket){
-            var freeSlots = lodash.first(apps[socket.appId].slots, function(slot) {
+            var freeSlots = lodash.filter(apps[socket.appId].slots, function(slot) {
+		console.log('slot', slot);
                 if(typeof(slot.playerSocket) == "undefined"){
                     return true;
                 }else{
@@ -71,7 +72,7 @@ io.sockets.on('connection', function (socket) {
         console.log('app join attempt', data);
         socket.appId = data;
         if(typeof(apps[socket.appId]) !='undefined' ){
-	    console.log('app', apps[socket.appId]);
+	    console.log('applalalala', apps[socket.appId]);
 	    socket.on(apps[socket.appId].type, function (data2){
 		console.log('event from client', data2);
 		console.log('sending mesage to appId:', socket.appId);
@@ -97,7 +98,7 @@ io.sockets.on('connection', function (socket) {
         if(typeof(socket.playerName) != 'undefined' && typeof(apps[socket.appId]) != 'undefined'){
 	   console.log('disconnect true', socket);
             socket.volatile.broadcast.to(socket.appId).emit('clientUnpaired', {playerName:socket.playerName});
-            var slotToRelease =  lodash.first(apps[socket.appId].slots, function(slot){
+            var slotToRelease =  lodash.filter(apps[socket.appId].slots, function(slot){
                 return  slot.playerName === socket.playerName;
             });
             if(slotToRelease.length > 0){
