@@ -36,16 +36,16 @@
 		});
 
 		document.getElementById('draw').addEventListener('touchstart', function(e) {
-			yustClient.emit('trackPad', 'mouseDown', { 'x': e.changedTouches[0].pageX, 'y': e.changedTouches[0].pageY });
+			yustClient.emit('mouseDown', { 'x': e.changedTouches[0].pageX, 'y': e.changedTouches[0].pageY });
 	    }, false);
 
 	    document.getElementById('draw').addEventListener('touchend', function(e) {
-			yustClient.emit('trackPad', 'mouseUp', { 'x': e.changedTouches[0].pageX, 'y': e.changedTouches[0].pageY });
+			yustClient.emit('mouseUp', { 'x': e.changedTouches[0].pageX, 'y': e.changedTouches[0].pageY });
 	    }, false);
 
 	    document.getElementById('draw').addEventListener('touchmove', function(e) {
 	        e.preventDefault();
-			yustClient.emit('trackPad', 'mouseMoveTo', { 'x': e.changedTouches[0].pageX, 'y': e.changedTouches[0].pageY })
+			yustClient.emit('mouseMoveTo', { 'x': e.changedTouches[0].pageX, 'y': e.changedTouches[0].pageY })
 	    }, false);
 	});
 
