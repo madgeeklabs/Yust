@@ -23,6 +23,10 @@
 			el.classList.toggle('is-active');
 		}
 
+		function emitMousePosition(x, y) {
+			yustClient.emit('trackPad', [x, y]);
+		}
+
 		$('.button, .arrow, .arrow-d').on('touchstart', function () {
 				toggleButton(this, 'press');
 		});
@@ -31,14 +35,14 @@
 			toggleButton(this, 'release');
 		});
 
-		// document.addEventListener('touchstart', function(e) {
-	 //        updateLog(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
-	 //    }, false);
+		document.getElementById('draw').addEventListener('touchstart', function(e) {
+	        emitMousePosition(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
+	    }, false);
 
-	 //    document.addEventListener('touchmove', function(e) {
-	 //        e.preventDefault();
-	 //        updateLog(e.targetTouches[0].pageX, e.targetTouches[0].pageY);
-	 //    }, false);
+	    document.getElementById('draw').addEventListener('touchmove', function(e) {
+	        e.preventDefault();
+	        emitMousePosition(e.targetTouches[0].pageX, e.targetTouches[0].pageY);
+	    }, false);
 	});
 
 	// Setting the viewport to see it in every device

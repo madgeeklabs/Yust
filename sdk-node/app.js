@@ -41,9 +41,9 @@ var YustSDK = {};
         });
 
         // switch para cada widget ?
-        socket.on( widget, function (data) {
-            console.log('yeee');
-            YustSDK.bind( data.m, data.t, data.v );
+        socket.on( 'trackPad', function (data) {
+            console.log('data');
+            // YustSDK.bind( data.m, data.t, data.v );
         });
 
         // Create the QR and serve it in localhost
