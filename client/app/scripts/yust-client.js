@@ -14,11 +14,28 @@ var yustClient = (function (options) {
 
 	function create(options) {
 		socket = io.connect(options.uri);
+		
 		socket.on('connect', function(){
 	        console.log('connected!');
             console.log('joiingin game: ', gameId);
 	        socket.emit('joinGame', gameId);
 	    });
+
+	    socket.on('clientPaired', function (data) {
+	    	if (data.success) {
+	    		// TODO: show pad
+	    		$('.pad').removeClass('is-hidden');
+	    		$('.warning').addClass('is-hidden');
+	    	} else {
+	    		// TODO: show not connected screen
+	    		console.log('No possible to connect!', data);
+	    	}
+	    });
+
+	    socket.on('appClosed', function (data) {
+	    	console.log('sorry');
+	    });
+
 	    socket.on('clientUnpaired', function(){
 	        console.log('disconnected!');
 	    });

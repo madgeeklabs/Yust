@@ -61,6 +61,7 @@ button {
 }
 
 .pad {
+    opacity: 1;
     position: relative;
     z-index: 100;
 }
@@ -73,23 +74,9 @@ button {
     margin-top: 1em;
 }
 
-@media only screen and (orientation:portrait) {
-  .pad {
-    display: none;
-  }
-
-  .warning {
-    opacity: 1;
-  }
-}
-
-@media only screen and (orientation:landscape) {
-  .warning {
+.is-hidden {
     opacity: 0;
-  }
 }
-
-
 
 
 

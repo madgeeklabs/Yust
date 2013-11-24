@@ -2,12 +2,20 @@
 	'use strict';
 
 	// Create the client and the connection
-    var serverIP = 'http://54.247.168.152:3000';
+    var serverIP = 'http://54.247.168.152:3000',
+    	states = {};
+
 	yustClient.create({ id: 'control', uri: serverIP });
 
 	// Using jQuery for speed purposes in the hackaton lol
 	$(document).on('ready', function () {
 		function toggleButton(el, ev) {
+			if (!states[el] || states[el] !== ev) {
+				states[el] = ev;
+			} else {
+				return;
+			}
+			
 			setTimeout(function () {
 				yustClient.emit(ev, el.dataset.value);
 			}, 0);
