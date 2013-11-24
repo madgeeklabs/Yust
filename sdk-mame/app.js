@@ -30,7 +30,7 @@ var YustSDK = {};
 
     YustSDK.init = function(){
         socket.on('connect', function (){
-            socket.emit('createGame', {appId: appId, slots: ['player1'], type: 'gamepad', appName: 'trackPad.node.js' });
+            socket.emit('createGame', {appId: appId, slots: ['player1', 'player2'], type: 'gamepad', appName: 'trackPad.node.js' });
         });
 
         socket.on('clientPaired', function (data) {
@@ -48,41 +48,88 @@ var YustSDK = {};
             // hardcoded screen resolution
             var order = "sudo python key.py ";
             var to_mame, to_mame_state;
-            // console.log('data', data);
-            switch (data.m) {
-                case 'press':
-                    to_mame_state = '1';
+            switch(data.p){
+                case "player1":
+                    console.log('data', data);
+                    switch (data.m) {
+                        case 'press':
+                            to_mame_state = '1';
+                            break;
+                        case 'release':
+                            to_mame_state = '0';
+                            break;
+                    } 
+                    switch (data.v) {
+                        case 'l':
+                            to_mame = 'a';
+                            break;
+                        case 'u':
+                            to_mame = 'w';
+                            break;
+                        case 'r':
+                            to_mame = 'd';
+                            break;
+                        case 'd':
+                            to_mame = 's';
+                            break;
+                        case 'x':
+                            to_mame = '1';
+                            break;
+                        case 'y':
+                            to_mame = '2';
+                            break;
+                        case 'a':
+                            to_mame = '3';
+                            break;
+                        case 'b':
+                            to_mame = '4';
+                            break;
+                    }
+                
                     break;
-                case 'release':
-                    to_mame_state = '0';
+                
+                case "player2":
+                    console.log('data', data);
+                    switch (data.m) {
+                        case 'press':
+                            to_mame_state = '1';
+                            break;
+                        case 'release':
+                            to_mame_state = '0';
+                            break;
+                    } 
+                    switch (data.v) {
+                        case 'l':
+                            to_mame = 'h';
+                            break;
+                        case 'u':
+                            to_mame = 'k';
+                            break;
+                        case 'r':
+                            to_mame = 'l';
+                            break;
+                        case 'd':
+                            to_mame = 'j';
+                            break;
+                        case 'x':
+                            to_mame = 'v';
+                            break;
+                        case 'y':
+                            to_mame = 'b';
+                            break;
+                        case 'a':
+                            to_mame = 'n';
+                            break;
+                        case 'b':
+                            to_mame = 'm';
+                            break;
+                    }
+                    
+
                     break;
-            } 
-            switch (data.v) {
-                case 'l':
-                    to_mame = 'a';
-                    break;
-                case 'u':
-                    to_mame = 'w';
-                    break;
-                case 'r':
-                    to_mame = 'd';
-                    break;
-                case 'd':
-                    to_mame = 's';
-                    break;
-                case 'x':
-                    to_mame = '1';
-                    break;
-                case 'y':
-                    to_mame = '2';
-                    break;
-                case 'a':
-                    to_mame = '3';
-                    break;
-                case 'b':
-                    to_mame = '4';
-                    break;
-            }
+                     
+            }            
+ 
             order = order +"'"+ to_mame+"' '" + to_mame_state + "'";
              
             // console.log('order', order);
@@ -93,7 +140,7 @@ var YustSDK = {};
         // Create the QR and serve it in localhost
         http.createServer(function(req, res) {
             res.writeHead(200, {'Content-Type': 'text/html'});
-            res.write('<html><body style="text-align:center"><h1 style="font-size: 5em">&iexcl;Scan this shit!</h1><img style="width: 500px" src="data:image/jpeg;base64,')
+            res.write('<html><body style="text-align:center"><h1 style="font-size: 2em; margin: 2em; font-family: Helvetica, Arial; color: #666;">&iexcl;Scan this shit!</h1><img style="width: 300px" src="data:image/jpeg;base64,')
             res.write(qrImageBase64);
             res.end('"/></body></html>');
         }).listen(3333);
