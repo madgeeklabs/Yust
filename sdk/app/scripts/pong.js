@@ -1,7 +1,7 @@
 var animate = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (callback) {
         window.setTimeout(callback, 1000 / 60)
     };
-var canvas = document.getElementById("game");
+var canvas = document.getElementById("canvas");
 var width = 700;
 var height = 400;
 canvas.width = width;
