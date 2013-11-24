@@ -6,7 +6,8 @@ var yustClient = (function (options) {
         type;
 
 	function emit(event, value) {
-		socket.emit(type, {
+		console.log('emit', type, event, value)
+		socket.emit('gamepad', {
 			'm': event,
 			'v': value
 		});
@@ -22,8 +23,6 @@ var yustClient = (function (options) {
 	    });
 
 	    socket.on('clientPaired', function (data) {
-	    	type = data.type;
-
 	    	if (type === 'trackPad') {
 	    		var objToShow = $('.draw');
 	    	} else {
@@ -31,6 +30,7 @@ var yustClient = (function (options) {
 	    	}
 
 	    	if (data.success) {
+	    		type = data.type;
 	    		$('.warning, .draw, .pad').addClass('is-hidden');
 	    		objToShow.removeClass('is-hidden');
 	    	} else {
