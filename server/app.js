@@ -30,22 +30,20 @@ var apps = {};
 io.sockets.on('connection', function (socket) {
     //console.log('socket connected');
     
-    var appId;
-        
 
     socket.on('createGame', function(data){
         console.log('createGame', data);
-        appId = data.appId;
-        apps.appId = {slots:[], waitingSockets:[], gameSocket:socket, type:data.type};
+        socket.appId = data.appId;
+        apps[socket.appId] = {slots:[], waitingSockets:[], gameSocket:socket, type:data.type};
         lodash.each(data.slots, function (playerName){
-            apps.appId.slots.push({playerName:playerName, playerSocket:undefined});
+            apps[socket.appId].slots.push({playerName:playerName, playerSocket:undefined});
         });
         
-        socket.join(appId);
+        socket.join(socket.appId);
     });
 
     var assingSlot = function(socket){
-            var freeSlots = lodash.first(apps.appId.slots, function(slot) {
+            var freeSlots = lodash.first(apps[socket.appId].slots, function(slot) {
                 if(typeof(slot.playerSocket) == "undefined"){
                     return true;
                 }else{
@@ -58,25 +56,31 @@ io.sockets.on('connection', function (socket) {
                 freeSlots[0]['playerSocket'] = socket; 
                 socket.playerName = freeSlots[0].playerName; 
                 console.log('app joined');
-                socket.join(appId);
-                apps.appId.gameSocket.emit('clientPaired', {playerName:freeSlots[0].playerName});
-                socket.emit('clientPaired', {success:true});
+                socket.join(socket.appId);
+                apps[socket.appId].gameSocket.emit('clientPaired', {playerName:freeSlots[0].playerName});
+                socket.emit('clientPaired', {success:true, type:apps[socket.appId].type});
             }else{
                 socket.emit('clientPaired', {success:false, action:'wait'});
-                apps.appId.waitingSockets.push(socket); 
+                apps[socket.appId].waitingSockets.push(socket); 
             }
     };
 
     socket.on('joinGame', function(data){
         console.log('app join attempt', data);
-        appId = data;
-        if(typeof(apps.appId) !='undefined' ){
-	    socket.on(apps.appId.type, function (data2){
+        socket.appId = data;
+        if(typeof(apps[socket.appId]) !='undefined' ){
+	    console.log('app', apps[socket.appId]);
+	    socket.on(apps[socket.appId].type, function (data2){
 		console.log('event from client', data2);
-		console.log('sending mesage to appId:', appId);
-		data.p = socket.playerName;
-		//io.sockets.in(appId).emit('control', data);
-		apps.appId.gameSocket.emit(data.type, data2);
+		console.log('sending mesage to appId:', socket.appId);
+		if(typeof(apps[socket.appId]) !='undefined' ){
+			console.log(apps[socket.appId].type, data2);
+			data.p = socket.playerName;
+			//io.sockets.in(appId).emit('control', data);
+			apps[socket.appId].gameSocket.emit(apps[socket.appId].type, data2);
+		}else{
+			console.log('app is dead ------------------------');
+		}
 	    });
             assingSlot(socket);     
         }else{
@@ -87,22 +91,22 @@ io.sockets.on('connection', function (socket) {
     });
 
     socket.on('disconnect', function(){
-        if(typeof(socket.playerName) != 'undefined' && typeof(apps.appId) != 'undefined'){
+        if(typeof(socket.playerName) != 'undefined' && typeof(apps[socket.appId]) != 'undefined'){
 	   console.log('disconnect true', socket);
-            socket.volatile.broadcast.to(appId).emit('clientUnpaired', {playerName:socket.playerName});
-            var slotToRelease =  lodash.first(apps.appId.slots, function(slot){
+            socket.volatile.broadcast.to(socket.appId).emit('clientUnpaired', {playerName:socket.playerName});
+            var slotToRelease =  lodash.first(apps[socket.appId].slots, function(slot){
                 return  slot.playerName === socket.playerName;
             });
             if(slotToRelease.length > 0){
                 slotToRelease[0].playerSocket = undefined;
-            }
-            if(apps.appId.waitingSockets.length > 0){
-		console.log('waiting sockets', apps.appId.waitingSockets);
-                assingSlot(apps.appId.waitingSockets[0]);     
+	}
+            if(apps[socket.appId].waitingSockets.length > 0){
+		console.log('waiting sockets', apps[socket.appId].waitingSockets);
+                assingSlot(apps[socket.appId].waitingSockets[0]);     
             }
         }else{
 	   console.log('disconnect else', socket);
-            delete apps.appId;
+            delete apps[socket.appId];
             socket.emit('apps closed','sorry');
         } 
     });
