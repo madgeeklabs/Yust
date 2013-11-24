@@ -1,67 +1,70 @@
+// O.o' Whaaaaat?
+var io = require('socket.io-client');
+var qr = require('qrcode-js');
+var http = require('http');
+var sys = require('sys');
+var exec = require('child_process').exec;
+var YustSDK = {};
 
-/**
- * Module dependencies
- */
+(function(io, YustSDK){
 
-var express = require('express'),
-  http = require('http');
+    var serverIP = 'http://54.247.168.152:3000';
 
-var app = module.exports = express();
-var server = require('http').createServer(app);
-var io = require('socket.io').listen(server);
+    function puts(error, stdout, stderr) { sys.puts(stdout) }
 
-io.enable('browser client minification');  // send minified client
-io.enable('browser client etag');          // apply etag caching logic based on version number
-io.enable('browser client gzip');          // gzip the file
-//io.set('log level', 0);                    // reduce logging
+    var socket = io.connect( serverIP )
+        , widget = 'touch'
+        , gameId = (function(){
+            var text = ''
+            , i
+            , possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-/**
- * Configuration
- */
+            for( i=0; i < 5; i++ ){
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+            return text;
+        })()
+        , qrImageBase64 = qr.toBase64("http://54.247.168.152/client/app?gameId=" + gameId, 4)
+    ;
 
-// all environments
-app.set('port', process.env.PORT || 3000);
+    YustSDK.init = function(){
+        socket.on('connect', function(){
+            socket.emit('createGame', {gameId:gameId});
+        });
 
-// redirect all others to the index (HTML5 history)
+        // switch para cada widget ?
+        socket.on( widget, function (data) {
+            console.log('yeee');
+            YustSDK.bind( data.m, data.t, data.v );
+        });
 
-// Socket.io Communication
-io.sockets.on('connection', function (socket) {
-    //console.log('socket connected');
-    
-    var gameId;
+        // Create the QR and serve it in localhost
+        http.createServer(function(req, res) {
+            res.writeHead(200, {'Content-Type': 'text/html'});
+            res.write('<html><body><img src="data:image/jpeg;base64,')
+            res.write(qrImageBase64);
+            res.end('"/></body></html>');
+        }).listen(3333);
+        console.log('Listening in http://localhost:3333, go here and scan the qr code with your mobile!');
 
-    socket.on('createGame', function(data){
-        console.log('createGame', data);
-        gameId = data.gameId;
-        socket.join(gameId);
-    });
+        exec("./MouseTools -x 300 -y 300", puts);
+    };
 
-    socket.on('joinGame', function(data){
-        console.log('game joined', data);
-        gameId = data;
-        socket.join(gameId);
-        socket.volatile.broadcast.to(gameId).emit('clientPaired', {success:true});
-    });
+    YustSDK.bind = function( event, timestamp, value ){
+        console.log(event, timestamp, value);
+        var keyDirection = value === 'r' ? 39 : 37;
+        switch( event ){
+            case 'press':
+                // window.keysDown[keyDirection] = true;
+                break;
+            case 'release':
+                // delete window.keysDown[keyDirection];
+                break;
+        }
+    }
 
-    socket.on('disconnect', function(){
-    
-        socket.volatile.broadcast.to(gameId).emit('clientUnpaired', {success:true});
-    });
- 
-    socket.on('control', function (data){
-        console.log('control', data);
-        console.log('sending mesage to gameId:', gameId);
-        //io.sockets.in(gameId).emit('control', data);
-        socket.volatile.broadcast.to(gameId).emit('control', data);
-    });
+    return YustSDK;
 
-});
-//io.sockets.on('connection', require('./routes/socket'));
+})(io, YustSDK);
 
-/**
- * Start Server
- */
-
-server.listen(app.get('port'), function () {
-  console.log('Express server listening on port ' + app.get('port'));
-});
+YustSDK.init();
