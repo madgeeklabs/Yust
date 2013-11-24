@@ -27,10 +27,6 @@ var YustSDK = {};
         , qrImageBase64 = qr.toBase64("http://54.247.168.152/client/app?appId=" + appId, 4)
     ;
 
-    function mouseMoveTo(x, y) {
-        exec("./MouseTools -x "+ x +" -y "+ y, puts);
-    }
-
     YustSDK.init = function(){
         socket.on('connect', function (){
             socket.emit('createGame', {appId: appId, slots: ['player1'], type: 'trackPad' });
@@ -46,12 +42,19 @@ var YustSDK = {};
 
         // switch para cada widget ?
         socket.on( 'trackPad', function (data) {
+            var order = "./MouseTools -x "+ x +" -y "+ y;
+            mouseMoveTo(data.v.x, data.v.y);
+
             switch (data.m) {
-                case 'mouseMoveTo':
-                    mouseMoveTo(data.v.x, data.v.y);
+                case 'mouseUp':
+                    order += ' -releaseMouse';
+                    break;
+                case 'mouseDown':
+                    order += ' -leftClickNoRelease';
                     break;
             }
-            // YustSDK.bind( data.m, data.t, data.v );
+
+            exec(order, puts);
         });
 
         // Create the QR and serve it in localhost
