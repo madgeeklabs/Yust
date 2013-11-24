@@ -13,7 +13,7 @@ var YustSDK = {};
     function puts(error, stdout, stderr) { sys.puts(stdout) }
 
     var socket = io.connect( serverIP )
-        , widget = 'touch'
+        , widget = 'control'
         , gameId = (function(){
             var text = ''
             , i
@@ -29,7 +29,7 @@ var YustSDK = {};
 
     YustSDK.init = function(){
         socket.on('connect', function (){
-            socket.emit('createGame', {gameId: gameId, slots: ['player1']});
+            socket.emit('createGame', {gameId: gameId, slots: ['player1'], type: 'trackPad' });
         });
 
         socket.on('clientPaired', function (data) {

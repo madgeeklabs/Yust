@@ -22,9 +22,15 @@ var yustClient = (function (options) {
 	    });
 
 	    socket.on('clientPaired', function (data) {
+	    	if (data.type === 'trackPad') {
+	    		var objToShow = $('.draw');
+	    	} else {
+	    		var objToShow = $('.pad')
+	    	}
+
 	    	if (data.success) {
-	    		$('.pad').removeClass('is-hidden');
-	    		$('.warning').addClass('is-hidden');
+	    		$('.warning, .draw, .pad').addClass('is-hidden');
+	    		objToShow.removeClass('is-hidden');
 	    	} else {
 	    		// TODO: show not connected screen
 	    		console.log('No possible to connect!', data);
