@@ -7,7 +7,7 @@ var yustClient = (function (options) {
 
 	function emit(event, value) {
 		console.log('emit', type, event, value)
-		socket.emit('gamepad', {
+		socket.emit(type, {
 			'm': event,
 			'v': value
 		});
