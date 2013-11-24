@@ -34,6 +34,7 @@ io.sockets.on('connection', function (socket) {
     socket.on('createGame', function(data){
         console.log('createGame', data);
         socket.appId = data.appId;
+	socket.appName = data.appName;
         apps[socket.appId] = {slots:[], waitingSockets:[], gameSocket:socket, type:data.type};
         lodash.each(data.slots, function (playerName){
             apps[socket.appId].slots.push({playerName:playerName, playerSocket:undefined});
@@ -43,7 +44,8 @@ io.sockets.on('connection', function (socket) {
     });
 
     var assingSlot = function(socket){
-            var freeSlots = lodash.first(apps[socket.appId].slots, function(slot) {
+            var freeSlots = lodash.filter(apps[socket.appId].slots, function(slot) {
+		console.log('slot', slot);
                 if(typeof(slot.playerSocket) == "undefined"){
                     return true;
                 }else{
@@ -58,6 +60,7 @@ io.sockets.on('connection', function (socket) {
                 console.log('app joined');
                 socket.join(socket.appId);
                 apps[socket.appId].gameSocket.emit('clientPaired', {playerName:freeSlots[0].playerName});
+		console.log('clientPaired',{success:true, type:apps[socket.appId].type});
                 socket.emit('clientPaired', {success:true, type:apps[socket.appId].type});
             }else{
                 socket.emit('clientPaired', {success:false, action:'wait'});
@@ -69,14 +72,15 @@ io.sockets.on('connection', function (socket) {
         console.log('app join attempt', data);
         socket.appId = data;
         if(typeof(apps[socket.appId]) !='undefined' ){
-	    console.log('app', apps[socket.appId]);
+	    console.log('applalalala', apps[socket.appId]);
 	    socket.on(apps[socket.appId].type, function (data2){
 		console.log('event from client', data2);
 		console.log('sending mesage to appId:', socket.appId);
 		if(typeof(apps[socket.appId]) !='undefined' ){
 			console.log(apps[socket.appId].type, data2);
-			data.p = socket.playerName;
+			data2.p = socket.playerName;
 			//io.sockets.in(appId).emit('control', data);
+			console.log('---------------------------sendin=======',apps[socket.appId].gameSocket.appName);
 			apps[socket.appId].gameSocket.emit(apps[socket.appId].type, data2);
 		}else{
 			console.log('app is dead ------------------------');
@@ -94,7 +98,7 @@ io.sockets.on('connection', function (socket) {
         if(typeof(socket.playerName) != 'undefined' && typeof(apps[socket.appId]) != 'undefined'){
 	   console.log('disconnect true', socket);
             socket.volatile.broadcast.to(socket.appId).emit('clientUnpaired', {playerName:socket.playerName});
-            var slotToRelease =  lodash.first(apps[socket.appId].slots, function(slot){
+            var slotToRelease =  lodash.filter(apps[socket.appId].slots, function(slot){
                 return  slot.playerName === socket.playerName;
             });
             if(slotToRelease.length > 0){
