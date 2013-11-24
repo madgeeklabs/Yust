@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "socket.io": "~0.9.16",
-    "express": "~3.2.6"
+    "express": "~3.2.6",
+    "socket.io-client": "~0.9.16",
+    "qrcode-js": "0.0.2"
   }
 }
