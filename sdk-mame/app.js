@@ -30,33 +30,64 @@ var YustSDK = {};
 
     YustSDK.init = function(){
         socket.on('connect', function (){
-            socket.emit('createGame', {appId: appId, slots: ['player1'], type: 'trackPad', appName: 'trackPad.node.js' });
+            socket.emit('createGame', {appId: appId, slots: ['player1'], type: 'gamepad', appName: 'trackPad.node.js' });
         });
 
         socket.on('clientPaired', function (data) {
             console.log('clientPaired', data);
-            windowSize = exec('./MouseTools -location', puts);
         });
 
         socket.on('clientUnpaired', function (data) {
             console.log('clientUnpaired', data);
         });
 
+        var runningOrder;
+        
         // switch para cada widget ?
-        socket.on( 'trackPad', function (data) {
+        socket.on( 'gamepad', function (data) {
             // hardcoded screen resolution
-            var order = "./MouseTools -x "+ (data.v.x*1440) +" -y "+ (data.v.y*900);
-
+            var order = "sudo python key.py ";
+            var to_mame, to_mame_state;
+            console.log('data', data);
             switch (data.m) {
-                case 'mouseUp':
-                    order += ' -releaseMouse';
+                case 'press':
+                    to_mame_state = '1';
                     break;
-                case 'mouseDown':
-                    order += ' -leftClickNoRelease';
+                case 'release':
+                    to_mame_state = '0';
+                    break;
+            } 
+            switch (data.v) {
+                case 'l':
+                    to_mame = 'a';
+                    break;
+                case 'u':
+                    to_mame = 'w';
+                    break;
+                case 'r':
+                    to_mame = 'd';
+                    break;
+                case 'd':
+                    to_mame = 's';
+                    break;
+                case 'x':
+                    to_mame = '1';
+                    break;
+                case 'y':
+                    to_mame = '2';
+                    break;
+                case 'a':
+                    to_mame = '3';
+                    break;
+                case 'b':
+                    to_mame = '4';
                     break;
             }
-
+            order = order +"'"+ to_mame+"' '" + to_mame_state + "'";
+             
+            console.log('order', order);
             exec(order, puts);
+
         });
 
         // Create the QR and serve it in localhost
