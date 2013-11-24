@@ -27,6 +27,10 @@ var YustSDK = {};
         , qrImageBase64 = qr.toBase64("http://54.247.168.152/client/app?gameId=" + gameId, 4)
     ;
 
+    function mouseMoveTo(x, y) {
+        exec("./MouseTools -x "+ x +" -y "+ y, puts);
+    }
+
     YustSDK.init = function(){
         socket.on('connect', function (){
             socket.emit('createGame', {gameId: gameId, slots: ['player1'], type: 'trackPad' });
@@ -42,13 +46,11 @@ var YustSDK = {};
 
         // switch para cada widget ?
         socket.on( 'trackPad', function (data) {
-            console.log('trackPad', data);
-            // YustSDK.bind( data.m, data.t, data.v );
-        });
-
-        // switch para cada widget ?
-        socket.on( 'mouseDown', function (data) {
-            console.log('mouseDown', data);
+            switch (data.m) {
+                case 'mouseMoveTo':
+                    mouseMoveTo(data.v.x, data.v.y);
+                    break;
+            }
             // YustSDK.bind( data.m, data.t, data.v );
         });
 
@@ -64,18 +66,7 @@ var YustSDK = {};
         // exec("./MouseTools -x 300 -y 300", puts);
     };
 
-    YustSDK.bind = function( event, timestamp, value ){
-        console.log(event, timestamp, value);
-        var keyDirection = value === 'r' ? 39 : 37;
-        switch( event ){
-            case 'press':
-                // window.keysDown[keyDirection] = true;
-                break;
-            case 'release':
-                // delete window.keysDown[keyDirection];
-                break;
-        }
-    }
+   
 
     return YustSDK;
 
