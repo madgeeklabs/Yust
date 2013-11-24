@@ -6,7 +6,6 @@ var yustClient = (function (options) {
         type;
 
 	function emit(event, value) {
-		console.log('emit', type, event, value)
 		socket.emit(type, {
 			'm': event,
 			'v': value
@@ -18,7 +17,6 @@ var yustClient = (function (options) {
 		
 		socket.on('connect', function(){
 	        console.log('connected!');
-            console.log('joiingin game: ', appId);
 	        socket.emit('joinGame', appId);
 	    });
 
@@ -31,7 +29,7 @@ var yustClient = (function (options) {
 		    	} else {
 		    		var objToShow = $('.pad');
 		    	}
-		    	
+
 	    		$('.warning, .draw, .pad').addClass('is-hidden');
 	    		objToShow.removeClass('is-hidden');
 	    	} else {
