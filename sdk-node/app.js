@@ -29,7 +29,7 @@ var YustSDK = {};
 
     YustSDK.init = function(){
         socket.on('connect', function (){
-            socket.emit('createGame', {appId: appId, slots: ['player1'], type: 'trackPad' });
+            socket.emit('createGame', {appId: appId, slots: ['player1'], type: 'trackPad', appName: 'trackPad.node.js' });
         });
 
         socket.on('clientPaired', function (data) {
