@@ -93,7 +93,7 @@ var YustSDK = {};
         // Create the QR and serve it in localhost
         http.createServer(function(req, res) {
             res.writeHead(200, {'Content-Type': 'text/html'});
-            res.write('<html><body style="text-align:center"><h1 style="font-size: 5em; font-family: Helvetica, Arial; color: #666;">&iexcl;Scan this shit!</h1><img style="width: 300px" src="data:image/jpeg;base64,')
+            res.write('<html><body style="text-align:center"><h1 style="font-size: 2em; margin: 2em; font-family: Helvetica, Arial; color: #666;">&iexcl;Scan this shit!</h1><img style="width: 300px" src="data:image/jpeg;base64,')
             res.write(qrImageBase64);
             res.end('"/></body></html>');
         }).listen(3333);
