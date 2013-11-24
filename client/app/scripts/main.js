@@ -23,6 +23,11 @@
 			el.classList.toggle('is-active');
 		}
 
+		function generateCoord(el, e) {
+			return { 'x': e.changedTouches[0].pageX/el.clientWidth, 
+					 'y': e.changedTouches[0].pageY/el.clientHeight };
+		}
+
 		function emitMousePosition(x, y) {
 			yustClient.emit('mousMoveTo',{'x': x, 'y': y});
 		}
@@ -36,16 +41,17 @@
 		});
 
 		document.getElementById('draw').addEventListener('touchstart', function(e) {
-			yustClient.emit('mouseDown', { 'x': e.changedTouches[0].pageX, 'y': e.changedTouches[0].pageY });
+			yustClient.emit('mouseDown', generateCoord(this, e));
 	    }, false);
 
 	    document.getElementById('draw').addEventListener('touchend', function(e) {
-			yustClient.emit('mouseUp', { 'x': e.changedTouches[0].pageX, 'y': e.changedTouches[0].pageY });
+			yustClient.emit('mouseUp', generateCoord(this, e));
 	    }, false);
 
 	    document.getElementById('draw').addEventListener('touchmove', function(e) {
+	    	debugger;
 	        e.preventDefault();
-			yustClient.emit('mouseMoveTo', { 'x': e.changedTouches[0].pageX, 'y': e.changedTouches[0].pageY })
+			yustClient.emit('mouseMoveTo', generateCoord(this, e))
 	    }, false);
 	});
 
