@@ -27,8 +27,6 @@
 			yustClient.emit('trackPad', 'mousMoveTo',{'x': x, 'y': y});
 		}
 
-		function emit
-
 		$('.button, .arrow, .arrow-d').on('touchstart', function () {
 				toggleButton(this, 'press');
 		});
