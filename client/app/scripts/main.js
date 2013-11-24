@@ -30,6 +30,15 @@
 		$('.button, .arrow, .arrow-d').on('touchend', function () {
 			toggleButton(this, 'release');
 		});
+
+		document.addEventListener('touchstart', function(e) {
+	        updateLog(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
+	    }, false);
+
+	    document.addEventListener('touchmove', function(e) {
+	        e.preventDefault();
+	        updateLog(e.targetTouches[0].pageX, e.targetTouches[0].pageY);
+	    }, false);
 	});
 
 	// Setting the viewport to see it in every device
