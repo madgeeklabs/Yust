@@ -49,7 +49,6 @@
 	    }, false);
 
 	    document.getElementById('draw').addEventListener('touchmove', function(e) {
-	    	debugger;
 	        e.preventDefault();
 			yustClient.emit('mouseMoveTo', generateCoord(this, e))
 	    }, false);
