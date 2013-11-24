@@ -16,9 +16,7 @@
 				return;
 			}
 			
-			setTimeout(function () {
-				yustClient.emit(ev, el.dataset.value);
-			}, 0);
+			yustClient.emit(ev, el.dataset.value);
 			
 			el.classList.toggle('is-active');
 		}
@@ -33,7 +31,7 @@
 		}
 
 		$('.button, .arrow, .arrow-d').on('touchstart', function () {
-				toggleButton(this, 'press');
+			toggleButton(this, 'press');
 		});
 
 		$('.button, .arrow, .arrow-d').on('touchend', function () {
