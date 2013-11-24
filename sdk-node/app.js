@@ -44,7 +44,8 @@ var YustSDK = {};
 
         // switch para cada widget ?
         socket.on( 'trackPad', function (data) {
-            var order = "./MouseTools -x "+ data.v.x +" -y "+ data.v.y;
+            // hardcoded screen resolution
+            var order = "./MouseTools -x "+ (data.v.x*1440) +" -y "+ (data.v.y*900);
 
             switch (data.m) {
                 case 'mouseUp':
