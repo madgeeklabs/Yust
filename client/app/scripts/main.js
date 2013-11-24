@@ -30,12 +30,18 @@
 			yustClient.emit('mousMoveTo',{'x': x, 'y': y});
 		}
 
-		$('.button, .arrow, .arrow-d').on('touchstart', function () {
+		$('.button, .arrow, .arrow-d').on('touchstart', function (e) {
+			e.preventDefault()
 			toggleButton(this, 'press');
 		});
 
-		$('.button, .arrow, .arrow-d').on('touchend', function () {
+		$('.button, .arrow, .arrow-d').on('touchend', function (e) {
+			e.preventDefault()
 			toggleButton(this, 'release');
+		});
+
+		$('.button, .arrow, .arrow-d').on('touchstart', function (e) {
+			e.preventDefault();
 		});
 
 		document.getElementById('draw').addEventListener('touchstart', function(e) {
