@@ -25,9 +25,9 @@ game
     }
 })
 .on('clientPaired', function( response ){
-    $('#canvas').show('slow');
+    // $('#canvas').show('slow');
 })
 .on('clientUnpaired', function( response ){
-    $('#canvas').hide('slow');
+    // $('#canvas').hide('slow');
 })
 ;

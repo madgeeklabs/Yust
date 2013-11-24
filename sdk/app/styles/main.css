@@ -35,7 +35,7 @@ body {
 }
 
 #canvas {
-    display: none;
+    /*display: none;*/
     width: 700px;
     height: 400px;
     float: left;
