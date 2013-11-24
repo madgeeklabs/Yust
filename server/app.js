@@ -10,6 +10,7 @@ var app = module.exports = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 require('lodash');
+var lodash = _.noConflict();
 
 io.enable('browser client minification');  // send minified client
 io.enable('browser client etag');          // apply etag caching logic based on version number
@@ -37,7 +38,7 @@ io.sockets.on('connection', function (socket) {
         console.log('createGame', data);
         appId = data.appId;
         apps.appId = {slots:[], waitingSockets:[], gameSocket:socket};
-        _.each(data.slots, function (playerName){
+        lodash.each(data.slots, function (playerName){
             apps.appId.slots.push({playerName:playerName, playerSocket:undefined});
         });
         
@@ -45,7 +46,7 @@ io.sockets.on('connection', function (socket) {
     });
 
     var assingSlot = function(socket){
-            var freeSlots = _.first(apps.appId.slots, function(slot) {
+            var freeSlots = lodash.first(apps.appId.slots, function(slot) {
                 if(typeof(slot.playerSocket) == "undefined"){
                     return true;
                 }else{
@@ -80,7 +81,7 @@ io.sockets.on('connection', function (socket) {
     socket.on('disconnect', function(){
         if(socket.playerName){
             socket.volatile.broadcast.to(appId).emit('clientUnpaired', {playerName:socket.playerName});
-            var slotToRelease =  _.first(apps.appId.slots, function(slot){
+            var slotToRelease =  lodash.first(apps.appId.slots, function(slot){
                 return  slot.playerName === socket.playerName;
             });
             if(slotToRelease){
