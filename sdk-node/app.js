@@ -42,7 +42,6 @@ var YustSDK = {};
 
         // switch para cada widget ?
         socket.on( 'trackPad', function (data) {
-            console.log(data);
             var order = "./MouseTools -x "+ data.v.x +" -y "+ data.v.y;
 
             switch (data.m) {
@@ -54,7 +53,7 @@ var YustSDK = {};
                     break;
             }
 
-            exec(order, puts);
+            console.log('exec', exec(order, puts));
         });
 
         // Create the QR and serve it in localhost
