@@ -17,14 +17,14 @@
 			}
 			
 			setTimeout(function () {
-				yustClient.emit('control', ev, el.dataset.value);
+				yustClient.emit(ev, el.dataset.value);
 			}, 0);
 			
 			el.classList.toggle('is-active');
 		}
 
 		function emitMousePosition(x, y) {
-			yustClient.emit('trackPad', 'mousMoveTo',{'x': x, 'y': y});
+			yustClient.emit('mousMoveTo',{'x': x, 'y': y});
 		}
 
 		$('.button, .arrow, .arrow-d').on('touchstart', function () {

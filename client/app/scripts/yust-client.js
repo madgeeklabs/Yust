@@ -2,9 +2,10 @@ var yustClient = (function (options) {
 	'use strict';
 
 	var socket,
-        appId = getParameterByName('appId');
+        appId = getParameterByName('appId'),
+        type;
 
-	function emit(type, event, value) {
+	function emit(event, value) {
 		socket.emit(type, {
 			'm': event,
 			'v': value
@@ -21,7 +22,9 @@ var yustClient = (function (options) {
 	    });
 
 	    socket.on('clientPaired', function (data) {
-	    	if (data.type === 'trackPad') {
+	    	type = data.type;
+
+	    	if (type === 'trackPad') {
 	    		var objToShow = $('.draw');
 	    	} else {
 	    		var objToShow = $('.pad');
