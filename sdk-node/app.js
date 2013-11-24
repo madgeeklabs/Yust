@@ -35,7 +35,7 @@ var YustSDK = {};
 
         socket.on('clientPaired', function (data) {
             windowSize = exec('./MouseTools -location', puts);
-            console.log(windowSize);
+            console.log('windowsize: ', windowSize, ' /windowsize');
             console.log('clientPaired', data);
         });
 
@@ -46,8 +46,6 @@ var YustSDK = {};
         // switch para cada widget ?
         socket.on( 'trackPad', function (data) {
             var order = "./MouseTools -x "+ data.v.x +" -y "+ data.v.y;
-
-            console.log
 
             switch (data.m) {
                 case 'mouseUp':
