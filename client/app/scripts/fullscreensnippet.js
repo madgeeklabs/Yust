@@ -31,7 +31,6 @@ var el = document.getElementById("fullscreenTest");
 el.requestFullScreen = el.webkitRequestFullScreen || el.mozRequestFullScreen || el.requestFullScreen;
 
 document.body.onclick = function(e) {
-    console.log(fullScreenElement());
     if ((isFullScreen() && e.target !== el) || fullScreenElement() === el) {
         document.cancelFullScreen();
     } else if (e.target === el) {

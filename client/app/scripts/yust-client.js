@@ -16,7 +16,6 @@ var yustClient = (function (options) {
 		socket = io.connect(options.uri);
 		
 		socket.on('connect', function(){
-	        console.log('connected!');
 	        socket.emit('joinGame', appId);
 	    });
 
@@ -34,16 +33,15 @@ var yustClient = (function (options) {
 	    		objToShow.removeClass('is-hidden');
 	    	} else {
 	    		// TODO: show not connected screen
-	    		console.log('No possible to connect!', data);
 	    	}
 	    });
 
 	    socket.on('appClosed', function (data) {
-	    	console.log('sorry');
+	    	// console.log('sorry');
 	    });
 
 	    socket.on('clientUnpaired', function(){
-	        console.log('disconnected!');
+	        // console.log('disconnected!');
 	    });
 	}
 

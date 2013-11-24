@@ -34,11 +34,11 @@ var YustSDK = {};
         });
 
         socket.on('clientPaired', function (data) {
-            console.log('clientPaired', data);
+            // console.log('clientPaired', data);
         });
 
         socket.on('clientUnpaired', function (data) {
-            console.log('clientUnpaired', data);
+            // console.log('clientUnpaired', data);
         });
 
         var runningOrder;
@@ -48,7 +48,7 @@ var YustSDK = {};
             // hardcoded screen resolution
             var order = "sudo python key.py ";
             var to_mame, to_mame_state;
-            console.log('data', data);
+            // console.log('data', data);
             switch (data.m) {
                 case 'press':
                     to_mame_state = '1';
@@ -85,7 +85,7 @@ var YustSDK = {};
             }
             order = order +"'"+ to_mame+"' '" + to_mame_state + "'";
              
-            console.log('order', order);
+            // console.log('order', order);
             exec(order, puts);
 
         });
