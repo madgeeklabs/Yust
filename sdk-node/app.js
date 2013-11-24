@@ -34,12 +34,11 @@ var YustSDK = {};
         });
 
         socket.on('clientPaired', function (data) {
-            console.log('clientPaired', data);
             windowSize = exec('./MouseTools -location', puts);
         });
 
         socket.on('clientUnpaired', function (data) {
-            console.log('clientUnpaired', data);
+            // console.log('clientUnpaired', data);
         });
 
         // switch para cada widget ?
