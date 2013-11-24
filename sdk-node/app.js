@@ -42,6 +42,7 @@ var YustSDK = {};
 
         // switch para cada widget ?
         socket.on( 'trackPad', function (data) {
+            console.log(data);
             var order = "./MouseTools -x "+ data.v.x +" -y "+ data.v.y;
 
             switch (data.m) {
@@ -59,7 +60,7 @@ var YustSDK = {};
         // Create the QR and serve it in localhost
         http.createServer(function(req, res) {
             res.writeHead(200, {'Content-Type': 'text/html'});
-            res.write('<html><body style="text-align:center"><h1>Scan this shit</h1><img src="data:image/jpeg;base64,')
+            res.write('<html><body style="text-align:center"><h1 style="font-size: 5em">&iexcl;Scan this shit!</h1><img style="width: 500px" src="data:image/jpeg;base64,')
             res.write(qrImageBase64);
             res.end('"/></body></html>');
         }).listen(3333);
