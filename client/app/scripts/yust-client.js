@@ -2,7 +2,7 @@ var yustClient = (function (options) {
 	'use strict';
 
 	var socket,
-        gameId = getParameterByName('gameId');
+        appId = getParameterByName('appId');
 
 	function emit(type, event, value) {
 		socket.emit(type, {
@@ -16,8 +16,8 @@ var yustClient = (function (options) {
 		
 		socket.on('connect', function(){
 	        console.log('connected!');
-            console.log('joiingin game: ', gameId);
-	        socket.emit('joinGame', gameId);
+            console.log('joiingin game: ', appId);
+	        socket.emit('joinGame', appId);
 	    });
 
 	    socket.on('clientPaired', function (data) {

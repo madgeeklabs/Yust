@@ -14,7 +14,7 @@ var YustSDK = {};
 
     var socket = io.connect( serverIP )
         , widget = 'control'
-        , gameId = (function(){
+        , appId = (function(){
             var text = ''
             , i
             , possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -24,7 +24,7 @@ var YustSDK = {};
             }
             return text;
         })()
-        , qrImageBase64 = qr.toBase64("http://54.247.168.152/client/app?gameId=" + gameId, 4)
+        , qrImageBase64 = qr.toBase64("http://54.247.168.152/client/app?appId=" + appId, 4)
     ;
 
     function mouseMoveTo(x, y) {
@@ -33,7 +33,7 @@ var YustSDK = {};
 
     YustSDK.init = function(){
         socket.on('connect', function (){
-            socket.emit('createGame', {gameId: gameId, slots: ['player1'], type: 'trackPad' });
+            socket.emit('createGame', {appId: appId, slots: ['player1'], type: 'trackPad' });
         });
 
         socket.on('clientPaired', function (data) {
