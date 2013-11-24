@@ -24,7 +24,7 @@
 		}
 
 		function emitMousePosition(x, y) {
-			yustClient.emit('trackPad', [x, y]);
+			yustClient.emit('trackPad', {'x':x, 'y': y});
 		}
 
 		$('.button, .arrow, .arrow-d').on('touchstart', function () {
