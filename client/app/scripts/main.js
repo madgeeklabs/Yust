@@ -31,12 +31,10 @@
 		}
 
 		$('.button, .arrow, .arrow-d').on('touchstart', function (e) {
-			e.preventDefault()
 			toggleButton(this, 'press');
 		});
 
 		$('.button, .arrow, .arrow-d').on('touchend', function (e) {
-			e.preventDefault()
 			toggleButton(this, 'release');
 		});
 
