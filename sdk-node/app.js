@@ -29,7 +29,7 @@ var YustSDK = {};
 
     YustSDK.init = function(){
         socket.on('connect', function(){
-            socket.emit('createGame', {gameId:gameId});
+            socket.emit('createGame', {gameId: gameId, slots: ['player1']});
         });
 
         // switch para cada widget ?
