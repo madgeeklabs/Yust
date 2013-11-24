@@ -17,7 +17,6 @@
 			}
 			
 			setTimeout(function () {
-				console.log('emit', ev, el.dataset.value);
 				yustClient.emit(ev, el.dataset.value);
 			}, 0);
 			

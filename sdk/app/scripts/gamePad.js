@@ -97,6 +97,7 @@ var gamepad = $Yust.createApp('gamepad');
             socket.emit('createGame', {
                   appId: appId
                 , slots: ['Human']
+                , type: 'control'
             });
         });
 
