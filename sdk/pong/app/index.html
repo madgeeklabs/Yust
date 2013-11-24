@@ -1,0 +1,46 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Yust</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="styles/main.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="header row">
+                <h4 class="text-muted pull-right">control any shit</h4>
+                <h2 class="text-muted">Yust</h2>
+            </div>
+
+            <article id="main" class="row">
+                <canvas id="canvas" width="700" height="400">Loading...</canvas>
+                <div class="qrcontainer text-center">
+                    <h3 class="text-muted">Scan this code with your cellphone</h3>
+                    <div id="qrcode" style="width:256px;"></div>
+                </div>
+            </article>
+
+            <div class="footer row">
+                <p>♥ from the Yust team</p>
+            </div>
+        </div>
+
+        <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+
+        <script src="scripts/socket.io.min.js"></script>
+
+        <script src="scripts/qrcode.min.js"></script>
+        <script src="scripts/yustSdk.js"></script>
+        <!-- <script src="scripts/drawPad.js"></script> -->
+        <script src="scripts/gamePad.js"></script>
+        <script src="scripts/pong.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+</body>
+</html>

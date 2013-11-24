@@ -1,0 +1,72 @@
+/* Space out content a bit */
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+/*.header,
+.marketing,
+.footer {
+    padding-left: 15px;
+    padding-right: 15px;
+}*/
+
+/* Custom page header */
+.header {
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 30px;
+}
+
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+    padding-bottom: 19px;
+}
+
+/* Custom page footer */
+.footer {
+    margin-top: 30px;
+    padding-top: 19px;
+    color: #777;
+    border-top: 1px solid #e5e5e5;
+}
+
+#canvas {
+    /*display: none;*/
+    width: 700px;
+    height: 400px;
+    float: left;
+}
+
+.qrcontainer {
+    float: right;
+    background: #ffffff;
+}
+
+.qrcontainer #qrcode {
+    margin: 40px auto 0;
+}
+
+/* Responsive: Portrait tablets and up */
+/*@media screen and (min-width: 768px) {
+    .container {
+        max-width: 730px;
+    }
+
+    .header,
+    .marketing,
+    .footer {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .header {
+        margin-bottom: 30px;
+    }
+    .jumbotron {
+        border-bottom: 0;
+    }
+}
+*/
