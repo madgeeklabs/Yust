@@ -118,7 +118,7 @@ var gamepad = $Yust.createApp('gamepad');
 
     YustGamePad.bind = function( event, timestamp, value, name ){
         var keyDirection = value === 'r' ? 39 : 37;
-        if( name == 'Human' )
+        if( name == 'Human' ) {
             switch( event ){
                 case 'press':
                     console.log( 'The user: ' + name + ' pressed something');
