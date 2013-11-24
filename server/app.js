@@ -9,7 +9,7 @@ var express = require('express'),
 var app = module.exports = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
-require('lodash');
+var lodash  = require('lodash').noConflict();
 
 io.enable('browser client minification');  // send minified client
 io.enable('browser client etag');          // apply etag caching logic based on version number
@@ -37,7 +37,7 @@ io.sockets.on('connection', function (socket) {
         console.log('createGame', data);
         appId = data.appId;
         apps.appId = {slots:[], waitingSockets:[], gameSocket:socket};
-        _.each(data.slots, function (playerName){
+        lodash.each(data.slots, function (playerName){
             apps.appId.slots.push({playerName:playerName, playerSocket:undefined});
         });
         
@@ -45,17 +45,19 @@ io.sockets.on('connection', function (socket) {
     });
 
     var assingSlot = function(socket){
-            var freeSlots = _.first(apps.appId.slots, function(slot) {
+            var freeSlots = lodash.first(apps.appId.slots, function(slot) {
                 if(typeof(slot.playerSocket) == "undefined"){
                     return true;
                 }else{
                     return false;
                 }
             });
-            if (freeSlots){
-                freeSlots[0].playerSocket = socket; 
+		console.log('freeslots',freeSlots);
+		console.log('freeslots',freeSlots[0]);
+            if (freeSlots.length > 0){
+                freeSlots[0]['playerSocket'] = socket; 
                 socket.playerName = freeSlots[0].playerName; 
-                console.log('app joined', data);
+                console.log('app joined');
                 socket.join(appId);
                 apps.appId.gameSocket.emit('clientPaired', {playerName:freeSlots[0].playerName});
                 socket.emit('clientPaired', {success:true});
@@ -68,7 +70,7 @@ io.sockets.on('connection', function (socket) {
     socket.on('joinGame', function(data){
         console.log('app join attempt', data);
         appId = data;
-        if(apps.appId){
+        if(typeof(apps.appId) !='undefined' ){
             assingSlot(socket);     
         }else{
             //app does not exists
@@ -78,18 +80,21 @@ io.sockets.on('connection', function (socket) {
     });
 
     socket.on('disconnect', function(){
-        if(socket.playerName){
+        if(typeof(socket.playerName) != 'undefined'){
+	   console.log('disconnect true', socket);
             socket.volatile.broadcast.to(appId).emit('clientUnpaired', {playerName:socket.playerName});
-            var slotToRelease =  _.first(apps.appId.slots, function(slot){
+            var slotToRelease =  lodash.first(apps.appId.slots, function(slot){
                 return  slot.playerName === socket.playerName;
             });
-            if(slotToRelease){
-                slotToRelease.playerSocket = undefined;
+            if(slotToRelease.length > 0){
+                slotToRelease[0].playerSocket = undefined;
             }
-            if(apps.appId.waitingSockets){
+            if(apps.appId.waitingSockets.length > 0){
+		console.log('waiting sockets', apps.appId.waitingSockets);
                 assingSlot(apps.appId.waitingSockets[0]);     
             }
         }else{
+	   console.log('disconnect else', socket);
             delete apps.appId;
             socket.emit('apps closed','sorry');
         } 
@@ -100,7 +105,7 @@ io.sockets.on('connection', function (socket) {
         console.log('sending mesage to appId:', appId);
         data.p = socket.playerName;
         //io.sockets.in(appId).emit('control', data);
-        apps.appId.emit('control', data);
+        apps.appId.gameSocket.emit('control', data);
     });
 
 });
