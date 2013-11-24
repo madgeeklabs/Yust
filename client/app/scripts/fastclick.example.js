@@ -18,7 +18,7 @@ $(function() {
 $(function() {
 	var buttons = document.getElementsByClassName('button'),
 		arrows = document.getElementsByClassName('arrows'),
-		arrows_d = document.getElementsByClassName('arrows');
+		arrows_d = document.getElementsByClassName('arrows-d');
 
     FastClick.attach(document.body);
 
