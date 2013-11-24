@@ -8,7 +8,8 @@ var YustSDK = {};
 
 (function(io, YustSDK){
 
-    var serverIP = 'http://54.247.168.152:3000';
+    var serverIP = 'http://54.247.168.152:3000',
+        windowSize;
 
     function puts(error, stdout, stderr) { sys.puts(stdout) }
 
@@ -33,6 +34,8 @@ var YustSDK = {};
         });
 
         socket.on('clientPaired', function (data) {
+            windowSize = exec('./MouseTools -location', puts);
+            console.log(windowSize);
             console.log('clientPaired', data);
         });
 
@@ -44,6 +47,8 @@ var YustSDK = {};
         socket.on( 'trackPad', function (data) {
             var order = "./MouseTools -x "+ data.v.x +" -y "+ data.v.y;
 
+            console.log
+
             switch (data.m) {
                 case 'mouseUp':
                     order += ' -releaseMouse';
@@ -53,7 +58,7 @@ var YustSDK = {};
                     break;
             }
 
-            console.log('exec', exec(order, puts));
+            exec(order, puts);
         });
 
         // Create the QR and serve it in localhost
