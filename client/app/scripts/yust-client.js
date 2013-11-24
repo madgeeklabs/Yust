@@ -23,14 +23,15 @@ var yustClient = (function (options) {
 	    });
 
 	    socket.on('clientPaired', function (data) {
-	    	if (type === 'trackPad') {
-	    		var objToShow = $('.draw');
-	    	} else {
-	    		var objToShow = $('.pad');
-	    	}
-
 	    	if (data.success) {
 	    		type = data.type;
+
+	    		if (type === 'trackPad') {
+		    		var objToShow = $('.draw');
+		    	} else {
+		    		var objToShow = $('.pad');
+		    	}
+		    	
 	    		$('.warning, .draw, .pad').addClass('is-hidden');
 	    		objToShow.removeClass('is-hidden');
 	    	} else {
