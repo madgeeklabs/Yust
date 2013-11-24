@@ -16,9 +16,7 @@
 				return;
 			}
 			
-			setTimeout(function () {
-				yustClient.emit(ev, el.dataset.value);
-			}, 0);
+			yustClient.emit(ev, el.dataset.value);
 			
 			el.classList.toggle('is-active');
 		}
@@ -32,12 +30,16 @@
 			yustClient.emit('mousMoveTo',{'x': x, 'y': y});
 		}
 
-		$('.button, .arrow, .arrow-d').on('touchstart', function () {
-				toggleButton(this, 'press');
+		$('.button, .arrow, .arrow-d').on('touchstart', function (e) {
+			toggleButton(this, 'press');
 		});
 
-		$('.button, .arrow, .arrow-d').on('touchend', function () {
+		$('.button, .arrow, .arrow-d').on('touchend', function (e) {
 			toggleButton(this, 'release');
+		});
+
+		$('.button, .arrow, .arrow-d').on('touchstart', function (e) {
+			e.preventDefault();
 		});
 
 		document.getElementById('draw').addEventListener('touchstart', function(e) {
