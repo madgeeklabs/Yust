@@ -34,11 +34,11 @@ var YustSDK = {};
         });
 
         socket.on('clientPaired', function (data) {
-            console.log('clientPaired', data);
+            // console.log('clientPaired', data);
         });
 
         socket.on('clientUnpaired', function (data) {
-            console.log('clientUnpaired', data);
+            // console.log('clientUnpaired', data);
         });
 
         var runningOrder;
@@ -132,7 +132,7 @@ var YustSDK = {};
  
             order = order +"'"+ to_mame+"' '" + to_mame_state + "'";
              
-            console.log('order', order);
+            // console.log('order', order);
             exec(order, puts);
 
         });
@@ -140,7 +140,7 @@ var YustSDK = {};
         // Create the QR and serve it in localhost
         http.createServer(function(req, res) {
             res.writeHead(200, {'Content-Type': 'text/html'});
-            res.write('<html><body style="text-align:center"><h1 style="font-size: 5em">&iexcl;Scan this shit!</h1><img style="width: 500px" src="data:image/jpeg;base64,')
+            res.write('<html><body style="text-align:center"><h1 style="font-size: 5em">&iexcl;Scan this shit!</h1><img style="width: 500px" src="data:image/jpeg;base64,');
             res.write(qrImageBase64);
             res.end('"/></body></html>');
         }).listen(3333);
