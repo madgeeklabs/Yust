@@ -36,7 +36,7 @@ var YustSDK = {};
         socket.on('clientPaired', function (data) {
             console.log('clientPaired', data);
             windowSize = exec('./MouseTools -location', puts);
-            console.log('windowSize:', windowSize);
+            console.log('windowSize:', windowSize, ' /windowSize');
         });
 
         socket.on('clientUnpaired', function (data) {
