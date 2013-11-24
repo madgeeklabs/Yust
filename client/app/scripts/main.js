@@ -17,6 +17,7 @@
 			}
 			
 			setTimeout(function () {
+				console.log('emit', ev, el.dataset.value);
 				yustClient.emit(ev, el.dataset.value);
 			}, 0);
 			
@@ -31,14 +32,14 @@
 			toggleButton(this, 'release');
 		});
 
-		document.addEventListener('touchstart', function(e) {
-	        updateLog(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
-	    }, false);
+		// document.addEventListener('touchstart', function(e) {
+	 //        updateLog(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
+	 //    }, false);
 
-	    document.addEventListener('touchmove', function(e) {
-	        e.preventDefault();
-	        updateLog(e.targetTouches[0].pageX, e.targetTouches[0].pageY);
-	    }, false);
+	 //    document.addEventListener('touchmove', function(e) {
+	 //        e.preventDefault();
+	 //        updateLog(e.targetTouches[0].pageX, e.targetTouches[0].pageY);
+	 //    }, false);
 	});
 
 	// Setting the viewport to see it in every device
